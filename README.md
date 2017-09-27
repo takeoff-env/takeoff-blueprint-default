@@ -33,3 +33,8 @@ The default environments are listed below with the main environments from their 
 |server |ngnix     |1.13.x |Ngnix Proxy|
 
 Run via docker compose, you can begin to add plugins to the Hapi server.  You can easily add your own docker images for other services such as redis, memcache, mysql, etc.
+
+## Documentation
+
+* [API](./env/api/README.md)
+* [App](./env/app/README.md)

@@ -6,7 +6,7 @@ services:
   server:
     build:
       context: ../.
-      dockerfile: docker/server/Dockerfile.dev
+      dockerfile: docker/server/Dockerfile
     image: ngnix-server
     ports:
       - '80:80' # Connect localhost 80 port to container 80 port
@@ -21,7 +21,7 @@ services:
   app:
     build:
       context: ../.
-      dockerfile: docker/app/Dockerfile.dev
+      dockerfile: docker/app/Dockerfile
     image: frontend-app
     env_file: 
       - ./../env/app/.env
@@ -34,7 +34,7 @@ services:
   api:
     build:
       context: ../.
-      dockerfile: docker/api/Dockerfile.dev
+      dockerfile: docker/api/Dockerfile
     image: api-server
     env_file: 
       - ./../env/api/.env
@@ -51,7 +51,7 @@ services:
   db:
     build:
       context: ../.
-      dockerfile: docker/db/postgres/Dockerfile.dev
+      dockerfile: docker/db/postgres/Dockerfile
     env_file: ./../env/db/psql.env
     image: database
     ports:
