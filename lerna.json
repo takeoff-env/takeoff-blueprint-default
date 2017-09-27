@@ -1,0 +1,9 @@
+{
+    "lerna": "2.1.2",
+    "packages": [
+      "env/api",
+      "env/app"
+    ],
+    "version": "1.0.4"
+  }
+  
