@@ -1,3 +1,5 @@
+const Op = require('sequelize').Op;
+
 module.exports = {
     use_env_variable: false,
     development: {
@@ -6,6 +8,7 @@ module.exports = {
         database: 'myappdb',
         dialect: 'postgres',
         username: 'myappuser',
-        password: 'myapppassword'
+        password: 'myapppassword',
+        operatorsAliases: Op
     }
 };
