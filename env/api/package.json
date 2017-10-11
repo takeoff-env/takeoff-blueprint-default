@@ -15,29 +15,29 @@
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^1.0.3",
-    "boom": "^5.2.0",
+    "boom": "^6.0.0",
     "dotenv": "^4.0.0",
     "extract-zip": "^1.6.5",
     "glue": "^4.2.0",
     "handlebars": "^4.0.10",
-    "hapi": "^16.5.2",
+    "hapi": "^16.6.2",
     "hapi-auth-jwt": "^4.0.0",
-    "hapi-swagger": "^7.7.0",
+    "hapi-swagger": "^7.8.1",
     "inert": "^4.2.1",
-    "joi": "^10.6.0",
-    "jsonwebtoken": "^7.4.2",
+    "joi": "^11.3.4",
+    "jsonwebtoken": "^8.1.0",
     "minimist": "^1.2.0",
-    "moment": "^2.18.1",
-    "pg": "^7.1.0",
-    "sequelize": "^4.4.2",
+    "moment": "^2.19.0",
+    "pg": "^7.3.0",
+    "sequelize": "^4.13.8",
     "tmp": "0.0.33",
     "unzip": "^0.1.11",
     "unzipper": "^0.8.9",
     "vision": "^4.1.1"
   },
   "devDependencies": {
-    "eslint": "^4.4.1",
-    "nodemon": "^1.11.0",
-    "sequelize-cli": "^2.8.0"
+    "eslint": "^4.8.0",
+    "nodemon": "^1.12.1",
+    "sequelize-cli": "^3.0.0"
   }
 }
