@@ -12,5 +12,10 @@
     "type": "git",
     "url": "https://github.com/takeoff-env/takeoff-blueprint-basic.git"
   },
-  "author": "Tane Piper <piper.tane@gmail.com>"
+  "author": "Tane Piper <piper.tane@gmail.com>",
+  "scripts": {
+    "api:connect": "docker exec -it docker_api_1 /bin/bash",
+    "db:connect": "psql -h localhost -p 5431 -U myappuser -d myappdb",
+    "db:reset": "node utilities/takeoff/database-clean.js"
+  }
 }
