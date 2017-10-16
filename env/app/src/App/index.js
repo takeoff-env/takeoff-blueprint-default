@@ -18,7 +18,7 @@ if (REDUX_DEV_TOOLS) {
         window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
     );
 } else {
-    createStoreWithMiddleware(reducers);
+    store = createStoreWithMiddleware(reducers);
 }
 
 import View from './view';

@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 
 export default ({ onLogout }) => (
-    <button onClick={() => onLogout()} className="btn btn-primary">
-        <i className="pli-unlock icon-fw" />Logout
-    </button>
+    <a className="btn navbar-btn btn-primary ml-2 text-white" onClick={() => onLogout()}><i class="fa d-inline fa-lg fa-user-circle-o"></i> Log Out</a>
 );
