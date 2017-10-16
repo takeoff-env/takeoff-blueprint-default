@@ -36,7 +36,7 @@ export default ({
 
     return (
         <Navbar className="bg-primary navbar-dark" expand="md">
-            <NavbarBrand brand={<Link to="/">Takeoff React App</Link>}><br /></NavbarBrand>
+            <NavbarBrand tag={Link} to="/">Takeoff React App<br /></NavbarBrand>
             <NavbarToggler onClick={onUserMenuClick} />
             <Collapse isOpen={showingUserMenu} navbar>
                 <Nav className="ml-auto text-center justify-content-end">
