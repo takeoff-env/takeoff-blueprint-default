@@ -18,7 +18,7 @@ class NavBar extends Component {
         };
     }
 
-    onAdminClick(event) {
+    onAdminClick() {
         this.setState({ showingAdminMenu: !this.state.showingAdminMenu });
     }
 
