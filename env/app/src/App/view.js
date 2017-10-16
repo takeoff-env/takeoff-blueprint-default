@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Route, Link, Switch, Redirect, withRouter } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 
 import Login from '../components/Login';
 import { loginUser } from '../components/Login/actions';
@@ -9,7 +9,6 @@ import Users from '../components/Users';
 
 // Mocks
 const Home = () => <h1>Home</h1>;
-const WillMatch = () => <h1>WillMatch</h1>;
 const NoMatch = () => <h1>NoMatch</h1>;
 
 class App extends Component {

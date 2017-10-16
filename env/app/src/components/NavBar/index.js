@@ -1,11 +1,6 @@
 import React, { Component, PropTypes } from 'react';
-import Login from '../Login';
-import Logout from '../Logout';
-import { loginUser, logoutUser } from '../Login/actions';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
-
-import logo from './images/logo.png';
 
 import View from './view';
 
@@ -18,7 +13,7 @@ class NavBar extends Component {
         };
     }
 
-    onAdminClick(event) {
+    onAdminClick() {
         this.setState({ showingAdminMenu: !this.state.showingAdminMenu });
     }
 

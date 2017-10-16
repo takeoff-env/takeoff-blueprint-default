@@ -1,7 +1,6 @@
-import React, { Component, PropTypes } from 'react';
-import Login from '../Login';
+import React from 'react';
 import Logout from '../Logout';
-import { loginUser, logoutUser } from '../Login/actions';
+import { logoutUser } from '../Login/actions';
 import { Link } from 'react-router-dom';
 
 import logo from './images/logo.png';
