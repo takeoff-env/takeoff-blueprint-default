@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 export default ({ onLogout }) => (
     <button onClick={() => onLogout()} className="btn btn-primary">

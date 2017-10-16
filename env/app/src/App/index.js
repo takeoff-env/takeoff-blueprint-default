@@ -1,6 +1,6 @@
 /* global REDUX_DEV_TOOLS */
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter as Router} from 'react-router-dom';
 
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
