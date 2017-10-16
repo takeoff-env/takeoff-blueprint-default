@@ -24,19 +24,19 @@
     "hapi-auth-jwt": "^4.0.0",
     "hapi-swagger": "^7.8.1",
     "inert": "^4.2.1",
-    "joi": "^11.3.4",
+    "joi": "^13.0.0",
     "jsonwebtoken": "^8.1.0",
     "minimist": "^1.2.0",
-    "moment": "^2.19.0",
+    "moment": "^2.19.1",
     "pg": "^7.3.0",
-    "sequelize": "^4.13.8",
+    "sequelize": "^4.14.0",
     "tmp": "0.0.33",
     "unzip": "^0.1.11",
     "unzipper": "^0.8.9",
     "vision": "^4.1.1"
   },
   "devDependencies": {
-    "eslint": "^4.8.0",
+    "eslint": "^4.9.0",
     "nodemon": "^1.12.1",
     "sequelize-cli": "^3.0.0"
   }
