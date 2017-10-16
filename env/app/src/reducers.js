@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import auth from '../components/Login/reducers';
-import users, { initialUserState } from '../components/Users/reducers';
+import auth from './components/Login/reducers';
+import users, { initialUserState } from './components/Users/reducers';
 
 import { combineForms, createForms } from 'react-redux-form';
 
