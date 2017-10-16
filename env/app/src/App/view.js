@@ -14,7 +14,7 @@ const NoMatch = () => <h1>NoMatch</h1>;
 
 class App extends Component {
     render() {
-        const { dispatch, isAuthenticated, error } = this.props;
+        const { dispatch, isAuthenticated, error, version } = this.props;
         return (
             <main>
                 <NavBar isAuthenticated={isAuthenticated} dispatch={dispatch} {...this.props} />
@@ -37,6 +37,8 @@ class App extends Component {
                         </Switch>
                     </div>
                 </div>
+                <div>Version: {version}</div>
+                                
             </main>
         );
     }

@@ -39,7 +39,7 @@ const init = async (containerId = 'container') => {
         <Router>
             <Provider store={store}>
                 <AppContainer>
-                    <App />
+                    <App version={pkg.version}/>
                 </AppContainer>
             </Provider>
         </Router>,
