@@ -4,20 +4,30 @@ import Logout from '../Logout';
 import { loginUser, logoutUser } from '../Login/actions';
 import { Link } from 'react-router-dom';
 
+import { ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap';
+
 import logo from './images/logo.png';
 
 import classNames from 'classnames';
 
-export default ({ dispatch, isAuthenticated, isAdmin, showingAdminMenu, onAdminClick }) => {
+export default ({
+    dispatch,
+    isAuthenticated,
+    isAdmin,
+    showingAdminMenu,
+    showingUserMenu,
+    onAdminClick,
+    onUserMenuClick
+}) => {
     let dropdownToggle = classNames('mega-dropdown-toggle', { open: showingAdminMenu });
     let dropdown = classNames('dropdown-menu mega-dropdown-menu', { show: showingAdminMenu, hide: !showingAdminMenu });
 
     return (
         <nav className="navbar navbar-expand-md bg-primary navbar-dark">
             <div className="container">
-                <a className="navbar-brand" href="/">
+                <Link className="navbar-brand" to="/">
                     Takeoff React Application<br />
-                </a>
+                </Link>
                 <button
                     className="navbar-toggler navbar-toggler-right"
                     type="button"
@@ -33,45 +43,48 @@ export default ({ dispatch, isAuthenticated, isAdmin, showingAdminMenu, onAdminC
                 <div className="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
                     <ul className="navbar-nav">
                         {(isAdmin && (
-                            <li className="nav-item">
-                                <a className="nav-link" href="#">
-                                    <i className="fa d-inline fa-lg fa-bookmark-o" /> Admin
-                                </a>
-                            </li>
+                            <ButtonDropdown isOpen={showingAdminMenu} toggle={onAdminClick}>
+                                <DropdownToggle caret>Admin Menu</DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem>
+                                        <Link to="/users">
+                                            <i className="fa d-inline fa-lg fa-bookmark-o" /> Users
+                                        </Link>
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </ButtonDropdown>
                         )) ||
                             null}
                         {(isAuthenticated && (
-                            <li className="nav-item dropdown">
-                                <a
-                                    className="nav-link dropdown-toggle"
-                                    href="#"
-                                    id="navbarDropdownMenuLink"
-                                    data-toggle="dropdown"
-                                    aria-haspopup="true"
-                                    aria-expanded="false"
-                                >
-                                    User Menu
-                                </a>
-
-                                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                                    <a className="dropdown-item" href="#">
-                                        <i className="fa d-inline fa-lg fa-bookmark-o" /> Bookmarks
-                                    </a>
-
-                                    <a className="dropdown-item" href="#">
-                                        <i className="fa d-inline fa-lg fa-envelope-o" /> Contacts
-                                    </a>
-                                </div>
-                            </li>
+                            <ButtonDropdown isOpen={showingUserMenu} toggle={onUserMenuClick}>
+                                <DropdownToggle caret>User Menu</DropdownToggle>
+                                <DropdownMenu>
+                                    <DropdownItem>
+                                        <Link to="/bookmarks">
+                                            <i className="fa d-inline fa-lg fa-bookmark-o" /> Bookmarks
+                                        </Link>
+                                    </DropdownItem>
+                                    <DropdownItem>
+                                        <Link to="/contacts">
+                                            <i className="fa d-inline fa-lg fa-bookmark-o" /> Contacts
+                                        </Link>
+                                    </DropdownItem>
+                                    <DropdownItem divider />
+                                    <DropdownItem>
+                                        <Logout onLogout={() => dispatch(logoutUser())} />
+                                    </DropdownItem>
+                                </DropdownMenu>
+                            </ButtonDropdown>
                         )) ||
                             null}
                     </ul>
 
-                    {(isAuthenticated && <Logout onLogout={() => dispatch(logoutUser())} />) || (
+                    {(!isAuthenticated && (
                         <Link to="/login" className="btn navbar-btn btn-primary ml-2 text-white">
                             <i className="fa d-inline fa-lg fa-user-circle-o" /> Sign in
                         </Link>
-                    )}
+                    )) ||
+                        null}
                 </div>
             </div>
         </nav>

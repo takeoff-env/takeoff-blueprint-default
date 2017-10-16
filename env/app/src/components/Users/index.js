@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, Link, withRouter } from 'react-router-dom';
-import { fetchUsers } from './actions';
+import { fetchUsers, createUser } from './actions';
 
 import List from './views/list';
 import Form from './views/form';
@@ -17,8 +17,8 @@ class Users extends Component {
 
     handleChange() {}
 
-    handleSubmit({ username, password }) {
-        this.props.onLogin({ username, password });
+    handleSubmit({ username, password, displayName, role }) {
+        this.props.dispatch(createUser({ username, password, displayName, role }));
     }
 
     render() {
@@ -68,7 +68,9 @@ class Users extends Component {
                             <Route
                                 path="/users/:userId"
                                 render={props => {
-                                    return <Detail {...props} user={users.users.find(u => props.match.params.userId)} />;
+                                    return (
+                                        <Detail {...props} user={users.users.find(u => props.match.params.userId)} />
+                                    );
                                 }}
                             />
                         </Switch>

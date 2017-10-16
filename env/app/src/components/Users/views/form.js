@@ -27,7 +27,7 @@ export default ({ error, handleChange, handleUpdate, handleSubmit }) => (
         <div className="panel-body">
             <div className="row">
                 <div className="form-group">
-                    <label className="control-label">Display Namme</label>
+                    <label className="control-label">Display Name</label>
                     <Control.text model=".displayName" type="text" placeholder="Display Name" />
                 </div>
             </div>
@@ -37,15 +37,15 @@ export default ({ error, handleChange, handleUpdate, handleSubmit }) => (
             <div className="row">
                 <div className="form-group">
                     <label className="control-label">Role</label>
-                    <Control.select model=".role" id="user.role">
+                    <Control.select model=".role">
                         <option value="admin">Admin</option>
-                        <option value="commander">Commander</option>
+                        <option value="user">User</option>
                     </Control.select>
                 </div>
             </div>
         </div>
         <button className="btn btn-primary btn-lg btn-block" type="submit">
-            Sign In
+            Add User
         </button>
     </Form>
 );

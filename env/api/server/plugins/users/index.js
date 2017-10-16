@@ -40,7 +40,7 @@ const registerPlugin = (server, _options, next) => {
           password: Joi.string().required(),
           role: Joi.string().valid([
             'admin',
-            'commander',
+            'user',
           ])
         }
       }
@@ -86,7 +86,7 @@ const registerPlugin = (server, _options, next) => {
           password: Joi.string().allow(''),
           role: Joi.string().valid([
             'admin',
-            'commander',
+            'user',
           ])
         }
       }
