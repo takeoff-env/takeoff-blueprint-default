@@ -22,7 +22,7 @@ function receiveLogin({ token, credentials }) {
         isFetching: false,
         isAuthenticated: true,
         isAdmin: credentials.scope === 'admin',
-        token: token,
+        token: token
     };
 }
 
@@ -63,30 +63,29 @@ export function loginUser({ username, password }) {
         body: JSON.stringify({ username, password })
     };
 
-    return dispatch => {
+    return async dispatch => {
         // We dispatch requestLogin to kickoff the call to the API
         dispatch(requestLogin({ username, password }));
 
-        return fetch('/api/auth/admin', config)
-            .then(response => response.json().then(authentication => ({ authentication, response })))
-            .then(({ authentication, response }) => {
-                if (!response.ok) {
-                    // If there was a problem, we want to
-                    // dispatch the error condition
-                    dispatch(loginError(authentication));
-                    return Promise.reject(authentication);
-                }
+        try {
+            const result = await fetch('/api/auth/admin', config);
+            if (!result) {
+                throw new Error('No result from authentication request');
+            }
+            if (!result.ok) {
+                dispatch(loginError(authentication));
+                throw new Error(response.status);
+            }
+            const { token } = await result.json();
+            const credentials = jwtDecode(token);
 
-                const { token } = authentication;
-                const credentials = jwtDecode(token);
-
-                // If login was successful, set the token in local storage
-                sessionStorage.setItem('token', token);
-                // Dispatch the success action
-                dispatch(receiveLogin({ token, credentials }));
-                return Promise.resolve();
-            })
-            .catch(err => console.log(err, err.stack));
+            // If login was successful, set the token in local storage
+            sessionStorage.setItem('token', token);
+            // Dispatch the success action
+            dispatch(receiveLogin({ token, credentials }));
+        } catch (e) {
+            throw e;
+        }
     };
 }
 

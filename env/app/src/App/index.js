@@ -18,25 +18,18 @@ class App extends Component {
         return (
             <main>
                 <NavBar isAdmin={isAdmin} isAuthenticated={isAuthenticated} dispatch={dispatch} {...this.props} />
-                <div className="boxed">
-                    <div id="content-container">
-                        <Switch>
-                            <Route path="/" exact component={Home} />
-                            <Route
-                                path="/login"
-                                render={props => (
-                                    <Login
-                                        {...props}
-                                        error={error}
-                                        onLogin={credentials => dispatch(loginUser(credentials))}
-                                    />
-                                )}
-                            />
-                            <Route path="/users" component={Users} />
-                            <Route component={NoMatch} />
-                        </Switch>
-                    </div>
-                </div>
+                <Switch>
+                    <Route path="/" exact component={Home} />
+                    <Route
+                        path="/login"
+                        render={props => (
+                            <Login {...props} error={error} onLogin={credentials => dispatch(loginUser(credentials))} />
+                        )}
+                    />
+                    <Route path="/users" component={Users} />
+                    <Route component={NoMatch} />
+                </Switch>
+
                 <div>Version: {version}</div>
             </main>
         );

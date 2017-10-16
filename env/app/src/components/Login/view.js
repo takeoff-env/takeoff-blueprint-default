@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { Form, Control } from 'react-redux-form';
+import { Input } from 'reactstrap';
 
 import './style.scss';
 
-export default ({ error, handleChange, handleUpdate, handleSubmit }) => (
+export default ({ error, handleChange, handleUpdate, handleSubmit, validation }) => (
     <div className="card text-white p-5 bg-primary">
         <div className="card-body">
             <h1 className="mb-4">Login</h1>
@@ -21,9 +22,11 @@ export default ({ error, handleChange, handleUpdate, handleSubmit }) => (
                     <Control.text
                         model=".username"
                         autoFocus
-                        className="form-control login-form-username"
+                        className="login-form-username"
                         placeholder="Enter username"
                         autoComplete="off"
+                        component={Input}
+                        valid={validation.usernameValid}
                     />
                 </div>
 
@@ -33,9 +36,11 @@ export default ({ error, handleChange, handleUpdate, handleSubmit }) => (
                         model=".password"
                         type="password"
                         placeholder="Password"
-                        className="form-control login-form-username"
+                        className="login-form-username"
                         placeholder="Enter Password"
                         autoComplete="off"
+                        component={Input}
+                        valid={validation.passwordValid}
                     />
                 </div>
                 <button className="btn btn-secondary btn-lg btn-block" type="submit">
