@@ -23,11 +23,12 @@ class NavBar extends Component {
     }
 
     render() {
-        const { isAuthenticated, dispatch } = this.props;
+        const { isAuthenticated, isAdmin, dispatch } = this.props;
         const { showingAdminMenu } = this.state;
         return (
             <View
                 dispatch={dispatch}
+                isAdmin={isAdmin}
                 isAuthenticated={isAuthenticated}
                 showingAdminMenu={showingAdminMenu}
                 onAdminClick={this.onAdminClick.bind(this)}

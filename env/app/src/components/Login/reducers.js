@@ -17,20 +17,21 @@ export default function auth(state = {
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: true,
-        user: {},
+        isAdmin: action.isAdmin,
         error: ''
       })
     case LOGIN_FAILURE:
       return Object.assign({}, state, {
         isFetching: false,
         isAuthenticated: false,
-        user: {},
+        isAdmin: false,
         error: action.error
       })
     case LOGOUT_SUCCESS:
       return Object.assign({}, state, {
         isFetching: true,
         isAuthenticated: false,
+        isAdmin: false,
         user: {},
         token: '',
         error: ''

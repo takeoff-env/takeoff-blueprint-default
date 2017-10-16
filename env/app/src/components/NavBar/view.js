@@ -8,7 +8,7 @@ import logo from './images/logo.png';
 
 import classNames from 'classnames';
 
-export default ({ dispatch, isAuthenticated, showingAdminMenu, onAdminClick }) => {
+export default ({ dispatch, isAuthenticated, isAdmin, showingAdminMenu, onAdminClick }) => {
     let dropdownToggle = classNames('mega-dropdown-toggle', { open: showingAdminMenu });
     let dropdown = classNames('dropdown-menu mega-dropdown-menu', { show: showingAdminMenu, hide: !showingAdminMenu });
 
@@ -32,7 +32,7 @@ export default ({ dispatch, isAuthenticated, showingAdminMenu, onAdminClick }) =
                 </button>
                 <div className="collapse navbar-collapse text-center justify-content-end" id="navbar2SupportedContent">
                     <ul className="navbar-nav">
-                        {(isAuthenticated && (
+                        {(isAdmin && (
                             <li className="nav-item">
                                 <a className="nav-link" href="#">
                                     <i className="fa d-inline fa-lg fa-bookmark-o" /> Admin
@@ -40,22 +40,37 @@ export default ({ dispatch, isAuthenticated, showingAdminMenu, onAdminClick }) =
                             </li>
                         )) ||
                             null}
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <i className="fa d-inline fa-lg fa-bookmark-o" /> Bookmarks
-                            </a>
-                        </li>
-                        <li className="nav-item">
-                            <a className="nav-link" href="#">
-                                <i className="fa d-inline fa-lg fa-envelope-o" /> Contacts
-                            </a>
-                        </li>
+                        {(isAuthenticated && (
+                            <li className="nav-item dropdown">
+                                <a
+                                    className="nav-link dropdown-toggle"
+                                    href="#"
+                                    id="navbarDropdownMenuLink"
+                                    data-toggle="dropdown"
+                                    aria-haspopup="true"
+                                    aria-expanded="false"
+                                >
+                                    User Menu
+                                </a>
+
+                                <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                    <a className="dropdown-item" href="#">
+                                        <i className="fa d-inline fa-lg fa-bookmark-o" /> Bookmarks
+                                    </a>
+
+                                    <a className="dropdown-item" href="#">
+                                        <i className="fa d-inline fa-lg fa-envelope-o" /> Contacts
+                                    </a>
+                                </div>
+                            </li>
+                        )) ||
+                            null}
                     </ul>
 
                     {(isAuthenticated && <Logout onLogout={() => dispatch(logoutUser())} />) || (
-                        <a href="/login" className="btn navbar-btn btn-primary ml-2 text-white">
+                        <Link to="/login" className="btn navbar-btn btn-primary ml-2 text-white">
                             <i className="fa d-inline fa-lg fa-user-circle-o" /> Sign in
-                        </a>
+                        </Link>
                     )}
                 </div>
             </div>
