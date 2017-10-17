@@ -1,10 +1,19 @@
 # Takeoff Frontend App
 
-> *As of this readme, the current verion of the frontend needs some work to fix it, but I will still cover it in documentation*
+The Takeoff Frontend is a batteries-included application that is designed to get you kickstarted with the frontend of your application.
 
-The Takeoff frontend app is provided to take out all the hassle of setting up a React application.
+> **Please note that the application is currently under heavy development and you may find parts broken. I am aiming to release 1.0.0 by the end of October that will include a more stable starting example**
 
-It uses React 15 currently, with React Router v4, and a Redux store.
+Out of the box you get an application that is designed to hot reload with allowing you to write using ES6, ES7 and ES8 features, and preconfigued so you can start writing code.
+
+The complete application includes:
+
+* [React 16.0](https://reactjs.org/)
+* [Webpack](https://webpack.github.io/) / [Babel](https://babeljs.io/) / [React Hot Loader](https://github.com/gaearon/react-hot-loader)
+* [Redux](https://github.com/reactjs/react-redux)
+* [React Router v4](https://reacttraining.com/react-router/web/guides/philosophy)
+* [Reactstrap](https://reactstrap.github.io/)
+* [JSON Web Token Authentication](https://jwt.io/)
 
 The architecture is that the `index.js` file boostraps the app inside a `react-hot-loader` application (there is also some service worker stuff here, but that will be discussed later).
 

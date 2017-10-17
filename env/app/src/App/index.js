@@ -1,32 +1,67 @@
-/* global REDUX_DEV_TOOLS */
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Route, Switch, withRouter } from 'react-router-dom';
+import { Container } from 'reactstrap';
 
-import { createStore, applyMiddleware } from 'redux';
-import { Provider } from 'react-redux';
-import thunkMiddleware from 'redux-thunk';
+import Login from '../components/Login';
+import { loginUser, loginFromToken } from '../components/Login/actions';
+import NavBar from '../components/NavBar';
+import Users from '../components/Users';
 
-import reducers from './reducers';
-import api from '../services/api';
+import Home from '../components/Home';
 
-let createStoreWithMiddleware = applyMiddleware(thunkMiddleware, api)(createStore);
+// Mocks
+const WillMatch = () => <h1>WillMatch</h1>;
+const NoMatch = () => <h1>NoMatch</h1>;
 
-let store;
-if (REDUX_DEV_TOOLS) {
-    store = createStoreWithMiddleware(
-        reducers,
-        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-    );
-} else {
-    createStoreWithMiddleware(reducers);
+class App extends Component {
+    componentWillMount() {
+        const { dispatch } = this.props;
+        const token = sessionStorage.getItem('token');
+        if (token) {
+            loginFromToken(token, dispatch);
+        }
+    }
+
+    render() {
+        const { dispatch, isAuthenticated, isAdmin, error, version } = this.props;
+        return (
+            <main>
+                <NavBar {...this.props} />
+                <div className="py-5">
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <Route
+                            path="/login"
+                            render={props => (
+                                <Login
+                                    {...props}
+                                    error={error}
+                                    onLogin={credentials => dispatch(loginUser(credentials))}
+                                />
+                            )}
+                        />
+                        <Route path="/users" component={Users} />
+                        <Route component={NoMatch} />
+                    </Switch>
+                </div>
+
+                <div>Version: {version}</div>
+            </main>
+        );
+    }
 }
 
-import View from './view';
+function mapStateToProps(state) {
+    const { auth } = state;
+    const { isAuthenticated, isAdmin, error } = auth;
 
-export default ({ props }) => (
-    <Router>
-        <Provider store={store}>
-            <View {...props} />
-        </Provider>
-    </Router>
-);
+    return {
+        isAuthenticated,
+        isAdmin,
+        error
+    };
+}
+
+const connectState = connect(mapStateToProps)(App);
+export default withRouter(connectState);

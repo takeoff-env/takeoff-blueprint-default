@@ -14,23 +14,32 @@ class NavBar extends Component {
         super(...props);
 
         this.state = {
-            showingAdminMenu: false
+            showingAdminMenu: false,
+            showingUserMenu: false
         };
     }
 
-    onAdminClick(event) {
+    onAdminClick() {
         this.setState({ showingAdminMenu: !this.state.showingAdminMenu });
     }
 
+    onUserMenuClick() {
+        this.setState({ showingUserMenu: !this.state.showingUserMenu });
+    }
+
     render() {
-        const { isAuthenticated, dispatch } = this.props;
-        const { showingAdminMenu } = this.state;
+        const { isAuthenticated, isAdmin, dispatch, user } = this.props;
+        const { showingAdminMenu, showingUserMenu } = this.state;
         return (
             <View
                 dispatch={dispatch}
+                isAdmin={isAdmin}
                 isAuthenticated={isAuthenticated}
+                user={user}
                 showingAdminMenu={showingAdminMenu}
+                showingUserMenu={showingUserMenu}
                 onAdminClick={this.onAdminClick.bind(this)}
+                onUserMenuClick={this.onUserMenuClick.bind(this)}
             />
         );
     }
@@ -38,11 +47,14 @@ class NavBar extends Component {
 
 function mapStateToProps(state) {
     const { auth } = state;
-    const { isAuthenticated } = auth;
+    const { isAuthenticated, isAdmin, user } = auth;
 
     return {
-        isAuthenticated
+        isAuthenticated,
+        isAdmin,
+        user
     };
 }
 
-export default withRouter(connect(mapStateToProps)(NavBar));
+const connectState = connect(mapStateToProps)(NavBar);
+export default withRouter(connectState);

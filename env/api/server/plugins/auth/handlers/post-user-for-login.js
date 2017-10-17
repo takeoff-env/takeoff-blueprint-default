@@ -22,7 +22,9 @@ module.exports = (server, options) => {
                 return reply(Boom.unauthorized('Username or password do not match'));
             }
 
-            const token = jwt.sign({ id: user.id, scope: userType }, privateKey, {
+            const { id, displayName } = user;
+
+            const token = jwt.sign({ id, username, displayName, scope: userType }, privateKey, {
                 algorithm,
                 expiresIn: tokenExpiry
             });

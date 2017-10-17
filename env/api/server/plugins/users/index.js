@@ -40,7 +40,7 @@ const registerPlugin = (server, _options, next) => {
           password: Joi.string().required(),
           role: Joi.string().valid([
             'admin',
-            'commander',
+            'user',
           ])
         }
       }
@@ -56,6 +56,25 @@ const registerPlugin = (server, _options, next) => {
         scope: ['admin']
       },
       description: 'Get a user from the system',
+      notes: 'Returns an existing user by ID',
+      tags: ['api', 'user'],
+      validate: {
+        params: {
+          id: Joi.string().guid().required()
+        }
+      }
+    },
+    handler: require('./handlers/get-user-by-id')(server)
+  });
+
+  server.route({
+    method: 'GET',
+    path: '/user/{name}',
+    config: {
+      auth: {
+        scope: ['admin', 'user']
+      },
+      description: 'Get a user from the system by username',
       notes: 'Returns an existing user by ID',
       tags: ['api', 'user'],
       validate: {
@@ -86,7 +105,7 @@ const registerPlugin = (server, _options, next) => {
           password: Joi.string().allow(''),
           role: Joi.string().valid([
             'admin',
-            'commander',
+            'user',
           ])
         }
       }
