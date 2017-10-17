@@ -46,7 +46,6 @@ const loginError = error => ({
 
 export function loginFromToken(token, dispatch) {
     const credentials = jwtDecode(token);
-    console.log(credentials);
 
     // If login was successful, set the token in local storage
     sessionStorage.setItem('token', token);
