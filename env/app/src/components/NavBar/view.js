@@ -36,58 +36,36 @@ export default ({
 
     return (
         <Navbar className="bg-primary navbar-dark" expand="md">
-            <NavbarBrand tag={Link} to="/">Takeoff React App<br /></NavbarBrand>
+            <NavbarBrand tag={Link} to="/">
+                Takeoff React App<br />
+            </NavbarBrand>
             <NavbarToggler onClick={onUserMenuClick} />
             <Collapse isOpen={showingUserMenu} navbar>
-                <Nav className="ml-auto text-center justify-content-end">
+                <Nav className="ml-auto text-center justify-content-end navbar">
                     {(isAdmin && (
                         <NavItem>
-                            <ButtonDropdown isOpen={showingAdminMenu} toggle={onAdminClick}>
-                                <DropdownToggle caret>Admin Menu</DropdownToggle>
-                                <DropdownMenu>
-                                    <DropdownItem>
-                                        <Link to="/users">
-                                            <i className="fa d-inline fa-lg fa-bookmark-o" /> Users
-                                        </Link>
-                                    </DropdownItem>
-                                </DropdownMenu>
-                            </ButtonDropdown>
+                            <NavLink tag={Link} to="/users" className="btn navbar-btn btn-primary ml-2 text-white">
+                                <i className="fa d-inline fa-lg fa-user-circle-o" /> Users
+                            </NavLink>
                         </NavItem>
                     )) ||
                         null}
 
                     {(isAuthenticated && (
                         <NavItem>
-                        <ButtonDropdown isOpen={showingUserMenu} toggle={onUserMenuClick}>
-                            <DropdownToggle caret>User Menu</DropdownToggle>
-                            <DropdownMenu>
-                                <DropdownItem>
-                                    <Link to="/bookmarks">
-                                        <i className="fa d-inline fa-lg fa-bookmark-o" /> Bookmarks
-                                    </Link>
-                                </DropdownItem>
-                                <DropdownItem>
-                                    <Link to="/contacts">
-                                        <i className="fa d-inline fa-lg fa-bookmark-o" /> Contacts
-                                    </Link>
-                                </DropdownItem>
-                                <DropdownItem divider />
-                                <DropdownItem>
-                                    <Logout onLogout={() => dispatch(logoutUser())} />
-                                </DropdownItem>
-                            </DropdownMenu>
-                        </ButtonDropdown>
-                    </NavItem>
+                            <NavLink tag={Link} to="/profile" className="btn navbar-btn btn-primary ml-2 text-white">
+                                <i className="fa d-inline fa-lg fa-user-address-card-o" /> Profile
+                            </NavLink>
+                        </NavItem>
                     )) ||
                         null}
                     {(!isAuthenticated && (
                         <NavItem>
                             <Link to="/login" className="btn navbar-btn btn-primary ml-2 text-white">
-                                <i className="fa d-inline fa-lg fa-user-circle-o" /> Sign in
+                                <i className="fa d-inline fa-lg fa-unlock-alt" /> Sign in
                             </Link>
                         </NavItem>
-                    )) ||
-                        null}
+                    )) || <Logout onLogout={() => dispatch(logoutUser())} />}
                 </Nav>
             </Collapse>
         </Navbar>

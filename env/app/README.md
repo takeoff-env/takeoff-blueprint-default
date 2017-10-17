@@ -2,7 +2,7 @@
 
 The Takeoff Frontend is a batteries-included application that is designed to get you kickstarted with the frontend of your application.
 
-> **Please note that the application is currently under heavy development and you may find parts broken. I am aiming to release 1.1 by the end of October that will include a more stable starting example**
+> **Please note that the application is currently under heavy development and you may find parts broken. I am aiming to release 1.0.0 by the end of October that will include a more stable starting example**
 
 Out of the box you get an application that is designed to hot reload with allowing you to write using ES6, ES7 and ES8 features, and preconfigued so you can start writing code.
 
@@ -14,9 +14,6 @@ The complete application includes:
 * [React Router v4](https://reacttraining.com/react-router/web/guides/philosophy)
 * [Reactstrap](https://reactstrap.github.io/)
 * [JSON Web Token Authentication](https://jwt.io/)
-* 
-
-
 
 The architecture is that the `index.js` file boostraps the app inside a `react-hot-loader` application (there is also some service worker stuff here, but that will be discussed later).
 

@@ -7,50 +7,49 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
-function requestLogin(credentials) {
-    return {
-        type: LOGIN_REQUEST,
-        isFetching: true,
-        isAuthenticated: false,
-        credentials
-    };
-}
+const requestLogin = credentials => ({
+    type: LOGIN_REQUEST,
+    isFetching: true,
+    isAuthenticated: false,
+    credentials
+});
 
-function receiveLogin({ token, credentials }) {
-    return {
-        type: LOGIN_SUCCESS,
-        isFetching: false,
-        isAuthenticated: true,
-        isAdmin: credentials.scope === 'admin',
-        token: token
-    };
-}
+const receiveLogin = ({ token, credentials }) => ({
+    type: LOGIN_SUCCESS,
+    isFetching: false,
+    isAuthenticated: true,
+    isAdmin: credentials.scope === 'admin',
+    token: token
+});
 
-function requestLogout() {
-    return {
-        type: LOGOUT_REQUEST,
-        isFetching: true,
-        isAuthenticated: true
-    };
-}
+const requestLogout = () => ({
+    type: LOGOUT_REQUEST,
+    isFetching: true,
+    isAuthenticated: true
+});
 
-function receiveLogout() {
-    return {
-        type: LOGOUT_SUCCESS,
-        isFetching: false,
-        isAuthenticated: false,
-        isAdmin: false
-    };
-}
+const receiveLogout = () => ({
+    type: LOGOUT_SUCCESS,
+    isFetching: false,
+    isAuthenticated: false,
+    isAdmin: false
+});
 
-function loginError(error) {
-    return {
-        type: LOGIN_FAILURE,
-        isFetching: false,
-        isAuthenticated: false,
-        isAdmin: false,
-        error
-    };
+const loginError = error => ({
+    type: LOGIN_FAILURE,
+    isFetching: false,
+    isAuthenticated: false,
+    isAdmin: false,
+    error
+});
+
+export function loginFromToken(token, dispatch) {
+    const credentials = jwtDecode(token);
+
+    // If login was successful, set the token in local storage
+    sessionStorage.setItem('token', token);
+    // Dispatch the success action
+    return dispatch(receiveLogin({ token, credentials }));
 }
 
 export function loginUser({ username, password }) {
@@ -77,12 +76,8 @@ export function loginUser({ username, password }) {
                 throw new Error(response.status);
             }
             const { token } = await result.json();
-            const credentials = jwtDecode(token);
 
-            // If login was successful, set the token in local storage
-            sessionStorage.setItem('token', token);
-            // Dispatch the success action
-            dispatch(receiveLogin({ token, credentials }));
+            return loginFromToken(token, dispatch);
         } catch (e) {
             throw e;
         }

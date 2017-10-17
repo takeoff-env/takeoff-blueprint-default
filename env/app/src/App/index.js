@@ -3,16 +3,26 @@ import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
 
 import Login from '../components/Login';
-import { loginUser } from '../components/Login/actions';
+import { loginUser, loginFromToken } from '../components/Login/actions';
 import NavBar from '../components/NavBar';
 import Users from '../components/Users';
 
+import Home from '../components/Home';
+
 // Mocks
-const Home = () => <h1>Home</h1>;
 const WillMatch = () => <h1>WillMatch</h1>;
 const NoMatch = () => <h1>NoMatch</h1>;
 
 class App extends Component {
+    
+    componentDidMount() {
+        const { dispatch } = this.props;
+        const token = sessionStorage.getItem('token');
+        if (token) {
+            loginFromToken(token, dispatch);
+        }
+    }
+
     render() {
         const { dispatch, isAuthenticated, isAdmin, error, version } = this.props;
         return (
