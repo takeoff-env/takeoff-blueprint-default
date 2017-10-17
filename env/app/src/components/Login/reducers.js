@@ -19,6 +19,11 @@ export default function auth(
                 isFetching: false,
                 isAuthenticated: true,
                 isAdmin: action.isAdmin,
+                user: {
+                    username: action.credentials.username,
+                    displayName: action.credentials.displayName,
+                    scope: action.credentials.scope
+                },
                 error: ''
             });
         case LOGIN_FAILURE:

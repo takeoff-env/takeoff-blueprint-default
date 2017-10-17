@@ -7,11 +7,10 @@ export const LOGOUT_REQUEST = 'LOGOUT_REQUEST';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const LOGOUT_FAILURE = 'LOGOUT_FAILURE';
 
-const requestLogin = credentials => ({
+const requestLogin = () => ({
     type: LOGIN_REQUEST,
     isFetching: true,
-    isAuthenticated: false,
-    credentials
+    isAuthenticated: false
 });
 
 const receiveLogin = ({ token, credentials }) => ({
@@ -19,6 +18,7 @@ const receiveLogin = ({ token, credentials }) => ({
     isFetching: false,
     isAuthenticated: true,
     isAdmin: credentials.scope === 'admin',
+    credentials,
     token: token
 });
 
@@ -32,7 +32,8 @@ const receiveLogout = () => ({
     type: LOGOUT_SUCCESS,
     isFetching: false,
     isAuthenticated: false,
-    isAdmin: false
+    isAdmin: false,
+    credentials: {}
 });
 
 const loginError = error => ({
@@ -45,6 +46,7 @@ const loginError = error => ({
 
 export function loginFromToken(token, dispatch) {
     const credentials = jwtDecode(token);
+    console.log(credentials);
 
     // If login was successful, set the token in local storage
     sessionStorage.setItem('token', token);
@@ -72,8 +74,8 @@ export function loginUser({ username, password }) {
                 throw new Error('No result from authentication request');
             }
             if (!result.ok) {
-                dispatch(loginError(authentication));
-                throw new Error(response.status);
+                dispatch(loginError(result.status));
+                throw new Error(result.status);
             }
             const { token } = await result.json();
 

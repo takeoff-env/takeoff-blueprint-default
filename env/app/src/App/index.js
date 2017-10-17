@@ -15,7 +15,7 @@ const WillMatch = () => <h1>WillMatch</h1>;
 const NoMatch = () => <h1>NoMatch</h1>;
 
 class App extends Component {
-    componentDidMount() {
+    componentWillMount() {
         const { dispatch } = this.props;
         const token = sessionStorage.getItem('token');
         if (token) {
@@ -27,7 +27,7 @@ class App extends Component {
         const { dispatch, isAuthenticated, isAdmin, error, version } = this.props;
         return (
             <main>
-                <NavBar isAdmin={isAdmin} isAuthenticated={isAuthenticated} dispatch={dispatch} {...this.props} />
+                <NavBar {...this.props} />
                 <div className="py-5">
                     <Switch>
                         <Route path="/" exact component={Home} />

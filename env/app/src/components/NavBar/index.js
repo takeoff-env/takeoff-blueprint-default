@@ -28,13 +28,14 @@ class NavBar extends Component {
     }
 
     render() {
-        const { isAuthenticated, isAdmin, dispatch } = this.props;
+        const { isAuthenticated, isAdmin, dispatch, user } = this.props;
         const { showingAdminMenu, showingUserMenu } = this.state;
         return (
             <View
                 dispatch={dispatch}
                 isAdmin={isAdmin}
                 isAuthenticated={isAuthenticated}
+                user={user}
                 showingAdminMenu={showingAdminMenu}
                 showingUserMenu={showingUserMenu}
                 onAdminClick={this.onAdminClick.bind(this)}
@@ -46,10 +47,12 @@ class NavBar extends Component {
 
 function mapStateToProps(state) {
     const { auth } = state;
-    const { isAuthenticated } = auth;
+    const { isAuthenticated, isAdmin, user } = auth;
 
     return {
-        isAuthenticated
+        isAuthenticated,
+        isAdmin,
+        user
     };
 }
 

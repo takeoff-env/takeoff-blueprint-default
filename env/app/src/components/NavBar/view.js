@@ -26,6 +26,7 @@ export default ({
     dispatch,
     isAuthenticated,
     isAdmin,
+    user,
     showingAdminMenu,
     showingUserMenu,
     onAdminClick,
@@ -53,8 +54,8 @@ export default ({
 
                     {(isAuthenticated && (
                         <NavItem>
-                            <NavLink tag={Link} to="/profile" className="btn navbar-btn btn-primary ml-2 text-white">
-                                <i className="fa fa-fw fa-address-card-o" /> Profile
+                            <NavLink tag={Link} to={`/profile/${user.username}`} className="btn navbar-btn btn-primary ml-2 text-white">
+                                <i className="fa fa-fw fa-address-card-o" /> {user.displayName}
                             </NavLink>
                         </NavItem>
                     )) ||
