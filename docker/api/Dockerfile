@@ -1,4 +1,4 @@
-FROM node:8.5.0
+FROM node:8
 
 RUN useradd --user-group --create-home --shell /bin/false envuser
 ENV HOME=/home/envuser
