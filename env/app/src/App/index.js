@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Route, Switch, withRouter } from 'react-router-dom';
+import { Container } from 'reactstrap';
 
 import Login from '../components/Login';
 import { loginUser, loginFromToken } from '../components/Login/actions';
@@ -14,7 +15,6 @@ const WillMatch = () => <h1>WillMatch</h1>;
 const NoMatch = () => <h1>NoMatch</h1>;
 
 class App extends Component {
-    
     componentDidMount() {
         const { dispatch } = this.props;
         const token = sessionStorage.getItem('token');
@@ -28,17 +28,23 @@ class App extends Component {
         return (
             <main>
                 <NavBar isAdmin={isAdmin} isAuthenticated={isAuthenticated} dispatch={dispatch} {...this.props} />
-                <Switch>
-                    <Route path="/" exact component={Home} />
-                    <Route
-                        path="/login"
-                        render={props => (
-                            <Login {...props} error={error} onLogin={credentials => dispatch(loginUser(credentials))} />
-                        )}
-                    />
-                    <Route path="/users" component={Users} />
-                    <Route component={NoMatch} />
-                </Switch>
+                <div className="py-5">
+                    <Switch>
+                        <Route path="/" exact component={Home} />
+                        <Route
+                            path="/login"
+                            render={props => (
+                                <Login
+                                    {...props}
+                                    error={error}
+                                    onLogin={credentials => dispatch(loginUser(credentials))}
+                                />
+                            )}
+                        />
+                        <Route path="/users" component={Users} />
+                        <Route component={NoMatch} />
+                    </Switch>
+                </div>
 
                 <div>Version: {version}</div>
             </main>

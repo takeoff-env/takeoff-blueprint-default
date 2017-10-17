@@ -54,7 +54,7 @@ export default ({
                     {(isAuthenticated && (
                         <NavItem>
                             <NavLink tag={Link} to="/profile" className="btn navbar-btn btn-primary ml-2 text-white">
-                                <i className="fa d-inline fa-lg fa-user-address-card-o" /> Profile
+                                <i className="fa fa-fw fa-address-card-o" /> Profile
                             </NavLink>
                         </NavItem>
                     )) ||
