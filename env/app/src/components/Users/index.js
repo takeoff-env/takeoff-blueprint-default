@@ -95,4 +95,5 @@ function mapStateToProps(state) {
     };
 }
 
-export default withRouter(connect(mapStateToProps)(Users));
+const connectState = connect(mapStateToProps)(Users);
+export default withRouter(connectState);

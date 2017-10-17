@@ -56,4 +56,5 @@ function mapStateToProps(state) {
     };
 }
 
-export default withRouter(connect(mapStateToProps)(NavBar));
+const connectState = connect(mapStateToProps)(NavBar);
+export default withRouter(connectState);

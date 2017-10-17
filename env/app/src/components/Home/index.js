@@ -22,4 +22,5 @@ function mapStateToProps(state) {
     };
 }
 
-export default withRouter(connect(mapStateToProps)(Home));
+const connectState = connect(mapStateToProps)(Home);
+export default withRouter(connectState);

@@ -36,13 +36,13 @@ const init = async (containerId = 'container') => {
     registerServiceWorker();
 
     ReactDOM.render(
-        <Router>
+        <AppContainer>
             <Provider store={store}>
-                <AppContainer>
-                    <App version={pkg.version}/>
-                </AppContainer>
+                <Router>
+                    <App version={pkg.version} />
+                </Router>
             </Provider>
-        </Router>,
+        </AppContainer>,
         document.getElementById(containerId)
     );
 };
@@ -53,7 +53,11 @@ if (module.hot) {
         const NextApp = require('./App').default;
         ReactDOM.render(
             <AppContainer>
-                <NextApp />
+                <Provider store={store}>
+                    <Router>
+                        <NextApp version={pkg.version} />
+                    </Router>
+                </Provider>
             </AppContainer>,
             init()
         );
