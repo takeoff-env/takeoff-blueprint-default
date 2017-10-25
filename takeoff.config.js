@@ -2,18 +2,17 @@ let sleep = 'sleep 5';
 if (process.platform === 'win32') sleep = 'sleep -s 5';
 
 module.exports = ({ command, shell, args, opts, workingDir, ProgressBar }) => {
+    const bar = new ProgressBar({
+        schema: ' :title (:percent :elapseds :etas) [:bar]',
+        total: 5
+    });
 
-  const bar = new ProgressBar({
-    schema:' :title [:bar] :percent',
-    total: 5
-  });
-
-    bar.update(0, { title: 'Doing NPM Install'});
+    bar.update(0, { title: 'Doing NPM Install' });
 
     const submoduleInit = shell.exec(`npm install`, { cwd: __dirname, silent: opts.v ? false : true });
     if (submoduleInit.code !== 0) return false;
 
-    bar.tick(1, { title: 'Bootstrap Environment'});
+    bar.tick(1, { title: 'Bootstrap Environment' });
 
     const bootstrap = shell.exec(`node_modules/.bin/lerna bootstrap`, {
         cwd: __dirname,
@@ -21,7 +20,7 @@ module.exports = ({ command, shell, args, opts, workingDir, ProgressBar }) => {
     });
     if (bootstrap.code !== 0) return false;
 
-    bar.tick(1, { title: 'Running Docker Build'});
+    bar.tick(1, { title: 'Running Docker Build' });
 
     const build = shell.exec(`docker-compose -f docker/docker-compose.yml build --no-cache`, {
         cwd: __dirname,
@@ -29,7 +28,7 @@ module.exports = ({ command, shell, args, opts, workingDir, ProgressBar }) => {
     });
     if (build.code !== 0) return false;
 
-    bar.tick(1, { title: 'Initilising Database'});
+    bar.tick(1, { title: 'Initilising Database' });
 
     const dbinit = shell.exec(
         `docker-compose -f docker/docker-compose.yml build --no-cache \
@@ -38,7 +37,7 @@ module.exports = ({ command, shell, args, opts, workingDir, ProgressBar }) => {
     );
     if (dbinit.code !== 0) return false;
 
-    bar.tick(1, { title: 'Done'});
+    bar.tick(1, { title: 'Done' });
 
     return true;
 };
