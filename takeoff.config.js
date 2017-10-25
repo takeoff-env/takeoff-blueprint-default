@@ -10,7 +10,7 @@ module.exports = ({ command, shell, args, opts, workingDir, ProgressBar }) => {
     let currentTitle = { title: 'Doing NPM Install' };
 
     const updater = setInterval(() => {
-        bar.update(0, currentTitle);
+        bar.tick(0, currentTitle);
     }, 1000);
 
     bar.update(0, currentTitle);
