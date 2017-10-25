@@ -1,3 +1,6 @@
+let sleep = 'sleep 5';
+if (process.platform === 'win32') sleep = 'sleep -s 5';
+
 module.exports = environment => [
   { cmd: `mkdir -p envs/${environment}`, message: 'Creating environment' },
   { cmd: `git submodule init`, message: `Initialising submodules`, cwd: `envs/${environment}` },
