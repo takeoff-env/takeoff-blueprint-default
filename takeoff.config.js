@@ -7,12 +7,19 @@ module.exports = ({ command, shell, args, opts, workingDir, ProgressBar }) => {
         total: 5
     });
 
-    bar.update(0, { title: 'Doing NPM Install' });
+    let currentTitle = { title: 'Doing NPM Install' };
+
+    const updater = setInterval(() => {
+        bar.update(0, currentTitle);
+    }, 1000);
+
+    bar.update(0, currentTitle);
 
     const submoduleInit = shell.exec(`npm install`, { cwd: __dirname, silent: opts.v ? false : true });
     if (submoduleInit.code !== 0) return false;
 
-    bar.tick(1, { title: 'Bootstrap Environment' });
+    currentTitle = { title: 'Bootstrap Environment' };
+    bar.tick(1, currentTitle);
 
     const bootstrap = shell.exec(`node_modules/.bin/lerna bootstrap`, {
         cwd: __dirname,
@@ -20,7 +27,8 @@ module.exports = ({ command, shell, args, opts, workingDir, ProgressBar }) => {
     });
     if (bootstrap.code !== 0) return false;
 
-    bar.tick(1, { title: 'Running Docker Build' });
+    currentTitle = { title: 'Running Docker Build' };
+    bar.tick(1, currentTitle);
 
     const build = shell.exec(`docker-compose -f docker/docker-compose.yml build --no-cache`, {
         cwd: __dirname,
@@ -28,7 +36,8 @@ module.exports = ({ command, shell, args, opts, workingDir, ProgressBar }) => {
     });
     if (build.code !== 0) return false;
 
-    bar.tick(1, { title: 'Initilising Database' });
+    currentTitle = { title: 'Initilising Database' };
+    bar.tick(1, currentTitle);
 
     const dbinit = shell.exec(
         `docker-compose -f docker/docker-compose.yml build --no-cache \
@@ -37,7 +46,10 @@ module.exports = ({ command, shell, args, opts, workingDir, ProgressBar }) => {
     );
     if (dbinit.code !== 0) return false;
 
-    bar.tick(1, { title: 'Done' });
+    currentTitle = { title: 'Done' };
+    bar.tick(1, currentTitle);
+
+    clearInterval(updater);
 
     return true;
 };
