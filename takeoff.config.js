@@ -1,8 +1,7 @@
 let sleep = 'sleep 5';
 if (process.platform === 'win32') sleep = 'sleep -s 5';
 
-module.exports = ({ command, shell, args, workingDir }) => {
-    console.log('hi there');
+module.exports = ({ command, shell, args, options, workingDir }) => {
     const submoduleInit = shell.exec(`npm install`, { cwd: __dirname });
     if (submoduleInit.code !== 0) return false;
 
@@ -18,24 +17,3 @@ module.exports = ({ command, shell, args, workingDir }) => {
 
     return true;
 };
-
-// module.exports = environment => [
-//   { cmd: `npm install`, message: 'Installing blueprint dependencies', cwd: `envs/${environment}` },
-//   { cmd: `node_modules/.bin/lerna bootstrap`, message: 'Bootstrapping environments', cwd: `envs/${environment}` },
-//   {
-//     cmd: `docker-compose -f docker/docker-compose.yml build --no-cache`,
-//     message: 'Running Docker Compose Build',
-//     cwd: `envs/${environment}`,
-//   },
-//   {
-//     cmd: `docker-compose -f docker/docker-compose.yml up -d db`,
-//     message: 'Triggering database creation',
-//     cwd: `envs/${environment}`,
-//   },
-//   { cmd: `${sleep}`, message: 'Waiting for database' },
-//   {
-//     cmd: `docker-compose -f docker/docker-compose.yml stop db`,
-//     message: 'Shutting down database',
-//     cwd: `envs/${environment}`,
-//   },
-// ];
