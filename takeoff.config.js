@@ -4,10 +4,10 @@ if (process.platform === 'win32') sleep = 'sleep -s 5';
 module.exports = ({ command, shell, args, opts, workingDir, ProgressBar }) => {
     const bar = new ProgressBar({
         schema: ' :title (:current/:total :elapseds) [:bar]',
-        total: 5
+        total: 4
     });
 
-    bar.update(0, { title: 'Doing NPM Install' });
+    bar.tick(0, { title: 'Doing NPM Install' });
 
     const submoduleInit = shell.exec(`npm install`, { cwd: __dirname, silent: opts.v ? false : true });
     if (submoduleInit.code !== 0) return false;
