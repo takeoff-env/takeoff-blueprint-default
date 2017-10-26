@@ -32,7 +32,7 @@ module.exports = ({ command, shell, args, opts, workingDir, h }) => {
 
     const dbinit = shell.exec(
         `docker-compose -f docker/docker-compose.yml build --no-cache \
-&& ${sleep} && docker-compose -f docker/docker-compose.yml stop db`,
+&& docker-compose -f docker/docker-compose.yml up -d db && ${sleep} && docker-compose -f docker/docker-compose.yml stop db`,
         { cwd: __dirname, silent: opts.v ? false : true }
     );
     if (dbinit.code !== 0) return false;
