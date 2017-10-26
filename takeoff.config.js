@@ -2,7 +2,7 @@ let sleep = 'sleep 5';
 if (process.platform === 'win32') sleep = 'sleep -s 5';
 
 module.exports = ({ command, shell, args, opts, workingDir, h }) => {
-    const bar = new h.ProgressBar({
+    const bar = new h.progressbar({
         schema: ' :title (:current/:total :elapseds) [:bar]',
         total: 4
     });
