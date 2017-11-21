@@ -1,26 +1,20 @@
-const registerPlugin = (server, options, next) => {
+module.exports = {
+  name: 'ed-dashboard',
+  version: '1.0.0',
+  register: async server => {
     server.route({
-        method: 'GET',
-        path: '/dashboard',
-        config: {
-            auth: {
-                scope: ['admin']
-            }
-        },
-        handler: (req, reply) => {
-            reply.view('plugins/dashboard/views/index.html', {
-                apiPrefix: server.settings.app.apiPrefix
-            });
+      method: 'GET',
+      path: '/dashboard',
+      config: {
+        auth: {
+          scope: ['admin']
         }
+      },
+      handler: (req, h) => {
+        h.view('plugins/dashboard/views/index.html', {
+          apiPrefix: server.settings.app.apiPrefix
+        });
+      }
     });
-
-    return next();
+  }
 };
-
-registerPlugin.attributes = {
-    name: 'ed-dashboard',
-    version: '1.0.0',
-    dependencies: []
-};
-
-module.exports = registerPlugin;
