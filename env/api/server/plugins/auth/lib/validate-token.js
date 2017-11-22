@@ -8,15 +8,14 @@ const moment = require('moment');
  * @param cb
  * @returns {*}
  */
-module.exports = (_request, decoded, cb) => {
-
+module.exports = async (_request, decoded) => {
   if (!decoded.id) {
-    return cb(Boom.unauthorized(), false, decoded);
+    throw Boom.unauthorized();
   }
 
   if (moment().isAfter(decoded.exp * 1000)) {
-    return cb(Boom.unauthorized(), false, decoded);
+    throw Boom.unauthorized();
   }
 
-  return cb(null, true, decoded);
+  return decoded;
 };
