@@ -6,6 +6,7 @@ module.exports = {
       log: ['error', 'debug'],
       request: ['error']
     },
+    port: process.env.PORT || 10000,
     app: {
       root: Path.resolve(__dirname, '..'),
       apiPrefix: process.env.API_PREFIX || '/',
@@ -16,11 +17,7 @@ module.exports = {
         clearInvalid: false, // remove invalid cookies
         path: '/'
       }
-    }
-  },
-  connections: [{
-    port: process.env.PORT || 10000,
-    labels: ['api'],
+    },
     router: {
       stripTrailingSlash: true
     },
@@ -29,17 +26,8 @@ module.exports = {
         origin: ['*']
       }
     }
-  }],
-
-  registrations: [
-    {
-      plugin: 'hapi-auth-jwt'
-    },
-    {
-      plugin: 'inert'
-    },
-    {
-      plugin: 'vision'
-    }
-  ]
+  },
+  register: {
+    plugins: ['@tanepiper/hapi-auth-jwt', 'inert', 'vision']
+  }
 };

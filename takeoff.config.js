@@ -1,26 +1,46 @@
 let sleep = 'sleep 5';
 if (process.platform === 'win32') sleep = 'sleep -s 5';
 
-module.exports = environment => [
-  { cmd: `mkdir -p envs/${environment}`, message: 'Creating environment' },
-  { cmd: `git submodule init`, message: `Initialising submodules`, cwd: `envs/${environment}` },
-  { cmd: `git submodule update`, message: `Cloning submodules`, cwd: `envs/${environment}` },
-  { cmd: `npm install`, message: 'Installing blueprint dependencies', cwd: `envs/${environment}` },
-  { cmd: `npm run bootstrap`, message: 'Bootstrapping environments', cwd: `envs/${environment}` },
-  {
-    cmd: `docker-compose -f docker/docker-compose.yml build --no-cache`,
-    message: 'Running Docker Compose Build',
-    cwd: `envs/${environment}`,
-  },
-  {
-    cmd: `docker-compose -f docker/docker-compose.yml up -d db`,
-    message: 'Triggering database creation',
-    cwd: `envs/${environment}`,
-  },
-  { cmd: `${sleep}`, message: 'Waiting for database' },
-  {
-    cmd: `docker-compose -f docker/docker-compose.yml stop db`,
-    message: 'Shutting down database',
-    cwd: `envs/${environment}`,
-  },
-];
+module.exports = ({ command, shell, args, opts, workingDir, h }) => {
+  const bar = new h.progressbar({
+    schema: ' :title (:current/:total :elapseds) [:bar]',
+    total: 4,
+  });
+
+  bar.tick(0, { title: 'Doing NPM Install' });
+
+  const submoduleInit = shell.exec(`npm install`, {
+    cwd: __dirname,
+    silent: opts.v ? false : true,
+  });
+  if (submoduleInit.code !== 0) return false;
+
+  bar.tick(1, { title: 'Bootstrap Environment' });
+
+  const bootstrap = shell.exec(`node_modules/.bin/lerna bootstrap`, {
+    cwd: __dirname,
+    silent: opts.v ? false : true,
+  });
+  if (bootstrap.code !== 0) return false;
+
+  bar.tick(1, { title: 'Running Docker Build' });
+
+  const build = shell.exec(`docker-compose -f docker/docker-compose.yml build --no-cache`, {
+    cwd: __dirname,
+    silent: opts.v ? false : true,
+  });
+  if (build.code !== 0) return false;
+
+  bar.tick(1, { title: 'Initilising Database' });
+
+  const dbinit = shell.exec(
+    `docker-compose -f docker/docker-compose.yml build --no-cache \
+&& docker-compose -f docker/docker-compose.yml up -d db && ${sleep} && docker-compose -f docker/docker-compose.yml stop db`,
+    { cwd: __dirname, silent: opts.v ? false : true },
+  );
+  if (dbinit.code !== 0) return false;
+
+  bar.tick(1, { title: 'Done' });
+
+  return true;
+};

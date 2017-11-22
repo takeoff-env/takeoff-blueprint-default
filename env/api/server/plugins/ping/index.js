@@ -1,33 +1,24 @@
-const registerPlugin = (server, options, next) => {
-
-    const apiServer = server.select('api');
-
-    apiServer.route({
-        method: 'GET',
-        path: '/ping',
-        config: {
-            auth: false
-        },
-        handler: async function (req, reply) {
-            try {
-                const dbError = await apiServer.app.db.sequelize.authenticate();
-                if (!dbError) {
-                    return reply(true);
-                }
-                return reply(dbError);
-            } catch (e) {
-                reply(e);
-            }
-        }
-    });
-
-    return next();
-};
-
-registerPlugin.attributes = {
+module.exports = {
     name: 'ed-ping-uptime',
     version: '1.0.0',
-    dependencies: []
+    register: async server => {
+        server.route({
+            method: 'GET',
+            path: '/ping',
+            config: {
+                auth: false
+            },
+            handler: async function(req) {
+                try {
+                    const dbError = await req.server.app.db.sequelize.authenticate();
+                    if (!dbError) {
+                        return 'OK';
+                    }
+                    throw dbError;
+                } catch (e) {
+                    throw e;
+                }
+            }
+        });
+    }
 };
-
-module.exports = registerPlugin;
