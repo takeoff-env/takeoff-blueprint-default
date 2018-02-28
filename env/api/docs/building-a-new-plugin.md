@@ -16,69 +16,57 @@ Plugins provide a way to create logical units of code. First, create your folder
 In our index file, we create the following plugin registration file:
 
 ```js
-const registerPlugin = (server, options, next) => {
-
-    const apiServer = server.select('api');
-
-    apiServer.route({
-        method: 'GET',
-        path: '/hello-world',
-        config: {
-            auth: false
-        },
-        handler: function (req, reply) {
-            return reply({greeting: 'hello world'});
-        }
-    });
-
-    return next();
-};
-
-registerPlugin.attributes = {
-    name: 'hello-world',
+module.exports = {
+    name: 'my-plugin',
     version: '1.0.0',
-    dependencies: []
+    register: async server => {
+        server.route({
+            method: 'GET',
+            path: '/my-plugin',
+            config: {
+                auth: false
+            },
+            handler: async function(req) {
+                try {
+                    const dbError = await req.server.app.db.MyModel.getAll()
+                    if (!dbError) {
+                        return 'OK';
+                    }
+                    throw dbError;
+                } catch (e) {
+                    throw e;
+                }
+            }
+        });
+    }
 };
-
-module.exports = registerPlugin;
 ```
 
 Next, open `api/config/development.js`, and find the line that says `baseConfig.registrations.push`.  At the bottom of the parameters, add:
 
 ```js
-baseConfig.registrations.push(
-...
-, {
-    plugin: './hello-world'
-});
+const baseConfig = require('./_base');
+
+const newConfig = Object.assign({}, baseConfig);
+
+newConfig.register.plugins.push(
+  './plugin-1',
+  {
+    plugin: './my-plugin',
+    options: {
+      key: 'foo',
+      options: ['foo', 'bar']
+    }
+  },
+  './users',
+  './dashboard'
+);
+
+module.exports = newConfig;
 ```
 
 Now you can visit [http://localhost/api/hello-world](http://localhost/api/hello-world) - and as you can see, you haven't had to restart any server manually, it just works.
 
-If you want to provide your plugin options, you can instead pass this to the above `.push` method:
-
-```js
-...
-{
-    register: './hello-world',
-    options: {
-        greeting: 'hello'
-    }
-}
-...
-```
-
-Then you would access them like this:
-
-```js
-const registerPlugin = (server, options, next) => {
-...
-    handler: function (req, reply) {
-        return reply({greeting: `${options.greeting} world`});
-    }
-...
-}
-```
 
 ## Reference
 
