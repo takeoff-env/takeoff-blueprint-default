@@ -48,7 +48,7 @@ You will find several folders and files:
      |- README.md # The file you are looking at!
 ```
 
-Inside the docker folder and several docker files which create the environments.
+Inside the docker folder are several docker files which create the environments.
 
 The default environments are listed below with the main environments from their docker files.
 
