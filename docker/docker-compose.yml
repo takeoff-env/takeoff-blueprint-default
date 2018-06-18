@@ -24,9 +24,9 @@ services:
       dockerfile: docker/app/Dockerfile
     image: frontend-app
     env_file: 
-      - ./../env/app/.env
+      - ./../env/frontend-app/.env
     volumes: # For webpack dev server to use our local files
-      - ./../env/app:/home/envuser/apphome
+      - ./../env/frontend-app:/home/envuser/apphome
     ports:
       - '10001:10001' # For docker to now where to redirect HMR queries
 

@@ -20,6 +20,6 @@
     "db:reset": "node utilities/takeoff/database-clean.js"
   },
   "dependencies": {
-    "lerna": "^2.4.0"
+    "@angular/cli": "^6.0.8"
   }
 }

@@ -1,9 +1,9 @@
-FROM node:8
+FROM node:10
 
 RUN useradd --user-group --create-home --shell /bin/false envuser
 ENV HOME=/home/envuser
 
-COPY env/app/package.json $HOME/apphome/
+COPY env/frontend-app/package.json $HOME/apphome/
 RUN chown -R envuser:envuser $HOME/*
 
 USER envuser
