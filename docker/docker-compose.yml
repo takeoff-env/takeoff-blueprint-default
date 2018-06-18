@@ -12,17 +12,17 @@ services:
       - '80:80' # Connect localhost 80 port to container 80 port
     links: # Link services to access http://app and  http://api inside the container
       - api:api
-      - frontend-app:frontend-app
+      - app:app
     depends_on:
       - "api"
-      - "frontend-app"
+      - "app"
 
   # Frontend App
-  frontend-app:
+  app:
     build:
       context: ../.
       dockerfile: docker/frontend-app/Dockerfile
-    image: frontend-app
+    image: app
     env_file: 
       - ./../env/frontend-app/.env
     volumes: # For webpack dev server to use our local files
