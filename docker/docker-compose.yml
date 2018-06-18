@@ -18,10 +18,10 @@ services:
       - "app"
 
   # Frontend App
-  app:
+  frontend-app:
     build:
       context: ../.
-      dockerfile: docker/app/Dockerfile
+      dockerfile: docker/frontend-app/Dockerfile
     image: frontend-app
     env_file: 
       - ./../env/frontend-app/.env
