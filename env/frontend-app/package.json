@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --port $PORT --public-host http://app",
+    "start": "ng serve --port $PORT --disable-host-check",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
