@@ -6,7 +6,7 @@ const adminUser = [
   {
     username: 'admin',
     password: '$2a$10$C3eXG5ruD3M.WEspUYkE4OcxKmG0qq4MoyShyNkLb3BOVTXSFkDt2',
-    display_name: 'Super Admin',
+    displayName: 'Super Admin',
     role: 'admin',
   },
 ];
