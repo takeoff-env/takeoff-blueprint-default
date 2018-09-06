@@ -23,7 +23,7 @@ services:
       context: ../.
       dockerfile: docker/frontend-app/Dockerfile
     image: app
-    env_file: 
+    env_file:
       - ./../env/frontend-app/.env
     volumes: # For webpack dev server to use our local files
       - ./../env/frontend-app:/home/envuser/apphome
@@ -35,8 +35,8 @@ services:
     build:
       context: ../.
       dockerfile: docker/api/Dockerfile
-    image: api-server
-    env_file: 
+    image: api
+    env_file:
       - ./../env/api/.env
     links:
       - db:db
@@ -46,13 +46,13 @@ services:
       - '10000:10000'
     depends_on:
       - "db"
-  
-  # Database
+
   db:
-    build:
-      context: ../.
-      dockerfile: docker/db/postgres/Dockerfile
-    env_file: ./../env/db/psql.env
-    image: database
+    image: mongo
     ports:
-      - '5431:5432'
+      - "27017:27017"
+    volumes:
+      - data-volume:/data/db
+
+volumes:
+  data-volume:
