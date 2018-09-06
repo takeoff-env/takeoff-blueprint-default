@@ -1,22 +1,22 @@
 const { hashPassword } = require('../utils');
 
-module.exports = server => {
-  return async function(req, reply) {
-    const { username, password, role, displayName } = req.payload;
+module.exports = server => async req => {
+  const { username, password, role, displayName } = req.payload;
 
-    try {
-      const hashedPassword = await hashPassword(password);
-      const userObject = {
-        role,
-        username,
-        password: hashedPassword,
-        displayName: displayName
-      };
+  try {
+    const hashedPassword = await hashPassword(password);
+    const userObject = {
+      role,
+      username,
+      password: hashedPassword,
+      displayName,
+    };
 
-      const data = await server.app.db.User.create(userObject);
-      return { success: true, data };
-    } catch (e) {
-      throw e;
-    }
-  };
+    const newUser = new server.app.models.User(userObject);
+    const data = await newUser.save();
+
+    return { success: true, data };
+  } catch (e) {
+    throw e;
+  }
 };

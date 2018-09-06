@@ -4,13 +4,13 @@ module.exports = {
   name: 'api-users',
   version: '1.0.0',
   multiple: false,
-  register: async (server, _options) => {
+  register: async server => {
     server.route({
       method: 'GET',
       path: '/users',
       config: {
         auth: {
-          scope: ['admin']
+          scope: ['admin'],
         },
         description: 'Get a list of users from the system',
         notes: 'Takes optional limit and offset query parameters',
@@ -18,11 +18,11 @@ module.exports = {
         validate: {
           query: {
             limit: Joi.number().default(1000),
-            offset: Joi.number().default(0)
-          }
-        }
+            offset: Joi.number().default(0),
+          },
+        },
       },
-      handler: require('./handlers/get-users')(server)
+      handler: require('./handlers/get-users')(server),
     });
 
     server.route({
@@ -30,7 +30,7 @@ module.exports = {
       path: '/users',
       config: {
         auth: {
-          scope: ['admin']
+          scope: ['admin'],
         },
         auth: false,
         description: 'Create a new user',
@@ -41,11 +41,11 @@ module.exports = {
             username: Joi.string().required(),
             displayName: Joi.string().required(),
             password: Joi.string().required(),
-            role: Joi.string().valid(['admin', 'user'])
-          }
-        }
+            role: Joi.string().valid(['admin', 'user']),
+          },
+        },
       },
-      handler: require('./handlers/post-users')(server)
+      handler: require('./handlers/post-users')(server),
     });
 
     server.route({
@@ -53,7 +53,7 @@ module.exports = {
       path: '/users/{id}',
       config: {
         auth: {
-          scope: ['admin']
+          scope: ['admin'],
         },
         description: 'Get a user from the system',
         notes: 'Returns an existing user by ID',
@@ -62,11 +62,11 @@ module.exports = {
           params: {
             id: Joi.string()
               .guid()
-              .required()
-          }
-        }
+              .required(),
+          },
+        },
       },
-      handler: require('./handlers/get-user-by-id')(server)
+      handler: require('./handlers/get-user-by-id')(server),
     });
 
     server.route({
@@ -74,7 +74,7 @@ module.exports = {
       path: '/user/{name}',
       config: {
         auth: {
-          scope: ['admin', 'user']
+          scope: ['admin', 'user'],
         },
         description: 'Get a user from the system by username',
         notes: 'Returns an existing user by ID',
@@ -83,11 +83,11 @@ module.exports = {
           params: {
             id: Joi.string()
               .guid()
-              .required()
-          }
-        }
+              .required(),
+          },
+        },
       },
-      handler: require('./handlers/get-user-by-id')(server)
+      handler: require('./handlers/get-user-by-id')(server),
     });
 
     server.route({
@@ -95,7 +95,7 @@ module.exports = {
       path: '/users/{id}',
       config: {
         auth: {
-          scope: ['admin']
+          scope: ['admin'],
         },
         description: 'Update a user',
         notes: 'Updates a user in the database, returns a success if changed',
@@ -104,16 +104,16 @@ module.exports = {
           params: {
             id: Joi.string()
               .guid()
-              .required()
+              .required(),
           },
           payload: {
             username: Joi.string().required(),
             password: Joi.string().allow(''),
-            role: Joi.string().valid(['admin', 'user'])
-          }
-        }
+            role: Joi.string().valid(['admin', 'user']),
+          },
+        },
       },
-      handler: require('./handlers/put-users')(server)
+      handler: require('./handlers/put-users')(server),
     });
 
     server.route({
@@ -121,7 +121,7 @@ module.exports = {
       path: '/users/{id}',
       config: {
         auth: {
-          scope: ['admin']
+          scope: ['admin'],
         },
         description: 'Delete a user',
         notes: 'Deletes a user with a specific ID',
@@ -130,11 +130,11 @@ module.exports = {
           params: {
             id: Joi.string()
               .guid()
-              .required()
-          }
-        }
+              .required(),
+          },
+        },
       },
-      handler: require('./handlers/delete-users')(server)
+      handler: require('./handlers/delete-users')(server),
     });
-  }
+  },
 };
