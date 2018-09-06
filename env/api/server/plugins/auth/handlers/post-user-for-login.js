@@ -2,6 +2,8 @@ const Boom = require('boom');
 const jwt = require('jsonwebtoken');
 const { checkPassword } = require('../../users/utils');
 
+const User = require('../../../../database/models/user');
+
 module.exports = (server, options) => {
   return async function(req, h) {
     const { userType } = req.params;
@@ -13,7 +15,8 @@ module.exports = (server, options) => {
     }
 
     try {
-      const user = await server.app.db.User.findOne({ where: { username } });
+      const user = await User.findOne({ username });
+      //const user = await server.app.db.User.findOne({ where: { username } });
       if (!user) {
         throw Boom.unauthorized('Username or password do not match');
       }

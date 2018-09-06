@@ -1,4 +1,5 @@
 const Boom = require('boom');
+const User = require('../../../../database/models/user');
 
 module.exports = server => {
   return async function(req) {
@@ -9,7 +10,8 @@ module.exports = server => {
     }
 
     try {
-      const result = await server.app.db.User.destroy({ where: { id } });
+      const result = await User.deleteOne({ id });
+
       if (!result) {
         throw new Error('There has been an error deleting this user');
       }

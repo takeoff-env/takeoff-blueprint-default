@@ -11,16 +11,15 @@ const adminUser = [
   },
 ];
 
-class UsersSeeder extends Seeder {
-  async shouldRun() {
+const UsersSeeder = Seeder.extend({
+  shouldRun: function() {
     return User.count()
       .exec()
       .then(count => count === 0);
-  }
-
-  async run() {
+  },
+  run: function() {
     return User.create(adminUser);
-  }
-}
+  },
+});
 
-module.export = UsersSeeder;
+module.exports = UsersSeeder;

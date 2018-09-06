@@ -1,20 +1,23 @@
 const mongooseLib = require('mongoose');
 
-mongooseLib.Promise = global.Promise;
+mongooseLib.Promise = global.Promise || Promise;
 
-// Export the mongoose lib
-exports.mongoose = mongooseLib;
+const UsersSeeder = require('./database/seeders/users.seeder');
 
-// Export the mongodb url
-exports.mongoURL = process.env.MONGO_URL || 'mongodb://db';
+module.exports = {
 
-const UsersSeeder = require('./database/seeders/001_users');
+  // Export the mongoose lib
+  mongoose: mongooseLib,
 
-/*
-  Seeders List
-  ------
-  order is important
-*/
-exports.seedersList = {
-  Users: UsersSeeder,
+  // Export the mongodb url
+  mongoURL: process.env.MONGO_URL || 'mongodb://db',
+
+  /*
+    Seeders List
+    ------
+    order is important
+  */
+  seedersList: {
+    Users: UsersSeeder
+  }
 };
