@@ -1,11 +1,3 @@
-## takeoff
-
-Run task `npm:install:api` after this
-
-```bash
-echo "Welcome to Takeoff ✈️. Sit back and relax while we install your environment and projects."
-```
-
 ## npm:install:api
 
 Run task `npm:install:app` after this
