@@ -6,10 +6,11 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon index.js",
-    "start": "npx nodemon index.js",
+    "start": "md-seed run && npx nodemon index.js",
     "db:migrate": "npx sequelize db:migrate:undo:all && npx sequelize db:migrate",
     "db:seed": "npx sequelize db:seed:undo:all && npx sequelize db:seed:all",
-    "db:clean": "docker exec docker_api_1 node_modules/.bin/sequelize db:migrate:undo:all && docker exec docker_api_1 node_modules/.bin/sequelize db:migrate && docker exec docker_api_1 node_modules/.bin/sequelize db:seed:all"
+    "db:clean": "docker exec docker_api_1 node_modules/.bin/sequelize db:migrate:undo:all && docker exec docker_api_1 node_modules/.bin/sequelize db:migrate && docker exec docker_api_1 node_modules/.bin/sequelize db:seed:all",
+    "mongodb:seed": "md-seed run"
   },
   "author": "",
   "license": "ISC",
@@ -29,6 +30,7 @@
     "minimist": "^1.2.0",
     "moment": "^2.22.2",
     "mongoose": "^5.2.13",
+    "mongoose-data-seed": "^1.0.6",
     "nodemon": "^1.18.4",
     "pg": "^7.4.3",
     "sequelize": "^4.38.0",

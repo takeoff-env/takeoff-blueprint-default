@@ -17,5 +17,5 @@ cd env/frontend-app && npm install --silent
 ## docker:compose
 
 ```bash
-docker-compose -f docker/docker-compose.yml build --no-cache && docker-compose -f docker/docker-compose.yml up -d db && ${sleep} && docker-compose -f docker/docker-compose.yml stop db
+docker-compose -f docker/docker-compose.yml build --no-cache
 ```
