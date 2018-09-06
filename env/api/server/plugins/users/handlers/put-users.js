@@ -1,5 +1,4 @@
 const { hashPassword } = require('../utils');
-const User = require('../../../../database/models/user');
 
 module.exports = server => {
   return async (req, reply) => {

@@ -10,7 +10,7 @@ module.exports = server => {
         role,
         username,
         password: hashedPassword,
-        displayName: displayName,
+        displayName,
       };
 
       const newUser = new server.app.models.User(userObject);

@@ -20,6 +20,6 @@
     "db:reset": "node utilities/takeoff/database-clean.js"
   },
   "dependencies": {
-    "@angular/cli": "^6.0.8"
+    "@angular/cli": "^6.1.5"
   }
 }
