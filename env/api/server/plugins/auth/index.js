@@ -14,13 +14,16 @@ module.exports = {
   version: '1.0.0',
   register: async (server, options) => {
     /**
-       * Define that the server uses the JSON Web Token strategy for auth
-       * and session handling
-       */
+     * Define that the server uses the JSON Web Token strategy for auth
+     * and session handling
+     */
     server.auth.strategy('token', 'jwt', {
       key: options.privateKey,
       validateFunc: validateToken,
-      verifyOptions: { algorithms: options.algorithms, maxAge: options.maxAge }
+      verifyOptions: {
+        algorithms: options.algorithms,
+        maxAge: options.maxAge
+      }
     });
     server.auth.default('token');
 
@@ -42,8 +45,8 @@ module.exports = {
     });
 
     /**
-       * Auth route for pupils
-       */
+     * Auth route for pupils
+     */
     server.route({
       method: 'POST',
       path: '/auth/{userType}',

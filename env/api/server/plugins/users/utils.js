@@ -1,4 +1,8 @@
-const { genSalt, hash, compare } = require('bcrypt');
+const {
+  genSalt,
+  hash,
+  compare
+} = require('bcrypt');
 
 /**
  * Method to return a password hash

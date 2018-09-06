@@ -7,13 +7,13 @@
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
-      "prefix": "app",
+      "prefix": "takeoff",
       "schematics": {
         "@schematics/angular:component": {
           "styleext": "scss"
         }
       },
-      "architect": {
+      "targets": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
@@ -102,7 +102,7 @@
     "frontend-app-e2e": {
       "root": "e2e/",
       "projectType": "application",
-      "architect": {
+      "targets": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -119,6 +119,41 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "takeoff-auth": {
+      "root": "projects/takeoff-auth",
+      "sourceRoot": "projects/takeoff-auth/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "targets": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/takeoff-auth/tsconfig.lib.json",
+            "project": "projects/takeoff-auth/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/takeoff-auth/src/test.ts",
+            "tsConfig": "projects/takeoff-auth/tsconfig.spec.json",
+            "karmaConfig": "projects/takeoff-auth/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/takeoff-auth/tsconfig.lib.json",
+              "projects/takeoff-auth/tsconfig.spec.json"
+            ],
             "exclude": [
               "**/node_modules/**"
             ]
