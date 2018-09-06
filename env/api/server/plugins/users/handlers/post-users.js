@@ -1,7 +1,6 @@
 const { hashPassword } = require('../utils');
-const User = require('../../../../database/models/user');
 
-module.exports = () => {
+module.exports = server => {
   return async function(req) {
     const { username, password, role, displayName } = req.payload;
 
@@ -14,7 +13,7 @@ module.exports = () => {
         displayName: displayName,
       };
 
-      const newUser = new User(userObject);
+      const newUser = new server.app.models.User(userObject);
       const data = await newUser.save();
 
       return { success: true, data };

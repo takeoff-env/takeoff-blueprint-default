@@ -2,6 +2,7 @@ const Glue = require('glue');
 const Path = require('path');
 const handlebars = require('handlebars');
 const mongoose = require('mongoose');
+const models = require('../database');
 
 const createServer = async function createServer(config, env) {
   try {
@@ -37,9 +38,12 @@ const createServer = async function createServer(config, env) {
 
     server.app.mongoose = mongoose.connect('mongodb://db');
     server.app.db = mongoose.connection;
+    server.app.models = models;
 
     server.app.db.on('error', error => console.log(error));
-    server.app.db.on('open', () => console.log('Database Connection Established'))
+    server.app.db.on('open', () =>
+      console.log('Database Connection Established'),
+    );
 
     server.state('takeoff-auth', server.settings.app.cookieSettings);
 

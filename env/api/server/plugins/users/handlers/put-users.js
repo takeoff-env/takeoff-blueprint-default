@@ -7,7 +7,10 @@ module.exports = server => {
       req.payload.password = await hashPassword(req.payload.password);
     }
     try {
-      const result = await User.updateOne({ id: req.params.id }, req.payload);
+      const result = await server.app.models.User.updateOne(
+        { id: req.params.id },
+        req.payload,
+      );
       return { success: true, result };
     } catch (e) {
       throw e;
