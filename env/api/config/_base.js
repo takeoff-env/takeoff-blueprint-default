@@ -28,6 +28,6 @@ module.exports = {
     }
   },
   register: {
-    plugins: ['@tanepiper/hapi-auth-jwt', 'inert', 'vision']
+    plugins: ['@tanepiper/hapi-auth-jwt', 'inert', 'vision', './404']
   }
 };

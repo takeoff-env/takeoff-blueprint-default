@@ -7,8 +7,9 @@ const models = require('../database');
 const createServer = async function createServer(config, env) {
   try {
     const server = await Glue.compose(
-      config,
-      { relativeTo: Path.resolve(`${__dirname}/plugins`) },
+      config, {
+        relativeTo: Path.resolve(`${__dirname}/plugins`)
+      },
     );
 
     server.views({
@@ -20,43 +21,31 @@ const createServer = async function createServer(config, env) {
       layout: 'default',
     });
 
-    server.route({
-      method: ['GET', 'POST', 'PUT', 'DELETE'],
-      path: '/{path*}',
-      config: {
-        auth: false,
-      },
-      handler: (req, h) => {
-        const accept = req.raw.req.headers.accept;
-        if (accept && accept.match(/json/)) {
-          throw new Error('Whoops, this resource is not available');
-        }
-
-        return h.view('views/404').code(404);
-      },
-    });
-
-    server.app.mongoose = mongoose.connect('mongodb://db');
-    server.app.db = mongoose.connection;
+    const mg = mongoose.connect('mongodb://db');
+    server.app.db = {
+      mg,
+      connection: mg.connection,
+      models
+    }
     server.app.models = models;
 
-    server.app.db.on('error', error => console.log(error));
-    server.app.db.on('open', () =>
-      console.log('Database Connection Established'),
+    mg.connection.on('error', error => server.log(['error', 'mongoose'], error, Date.now()));
+    mg.connection.on('open', () =>
+      server.log(['debug', 'mongoose'], 'Database Connection Established mongodb://db', Date.now())
     );
 
     server.state('takeoff-auth', server.settings.app.cookieSettings);
 
     // If in the development environment we want to check all request and response types
-    // if (env === 'development') {
-    //   server.ext('onRequest', (__req, reply) => {
-    //     server.log(['debug', 'request'], 'Incoming request', Date.now());
-    //     return reply.continue();
-    //   });
-    //   server.on('response', () => {
-    //      server.log(['debug', 'request'], 'Request finished', Date.now());
-    //   });
-    // }
+    if (env === 'development') {
+      server.ext('onRequest', (__req, reply) => {
+        server.log(['debug', 'request'], 'Incoming request', Date.now());
+        return reply.continue();
+      });
+      server.on('response', () => {
+        server.log(['debug', 'request'], 'Request finished', Date.now());
+      });
+    }
 
     return server;
   } catch (e) {
