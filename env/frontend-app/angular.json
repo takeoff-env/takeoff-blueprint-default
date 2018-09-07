@@ -13,7 +13,7 @@
           "styleext": "scss"
         }
       },
-      "targets": {
+      "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
@@ -27,6 +27,7 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.scss"
             ],
             "scripts": []
@@ -76,6 +77,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
+              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles.scss"
             ],
             "scripts": [],
@@ -102,7 +104,7 @@
     "frontend-app-e2e": {
       "root": "e2e/",
       "projectType": "application",
-      "targets": {
+      "architect": {
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
@@ -126,33 +128,38 @@
         }
       }
     },
-    "takeoff-auth": {
-      "root": "projects/takeoff-auth",
-      "sourceRoot": "projects/takeoff-auth/src",
+    "@takeoff/auth": {
+      "root": "projects/takeoff/auth",
+      "sourceRoot": "projects/takeoff/auth/src",
       "projectType": "library",
       "prefix": "lib",
-      "targets": {
+      "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/takeoff-auth/tsconfig.lib.json",
-            "project": "projects/takeoff-auth/ng-package.json"
+            "tsConfig": "projects/takeoff/auth/tsconfig.lib.json",
+            "project": "projects/takeoff/auth/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/takeoff/auth/ng-package.prod.json"
+            }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/takeoff-auth/src/test.ts",
-            "tsConfig": "projects/takeoff-auth/tsconfig.spec.json",
-            "karmaConfig": "projects/takeoff-auth/karma.conf.js"
+            "main": "projects/takeoff/auth/src/test.ts",
+            "tsConfig": "projects/takeoff/auth/tsconfig.spec.json",
+            "karmaConfig": "projects/takeoff/auth/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/takeoff-auth/tsconfig.lib.json",
-              "projects/takeoff-auth/tsconfig.spec.json"
+              "projects/takeoff/auth/tsconfig.lib.json",
+              "projects/takeoff/auth/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
