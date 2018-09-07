@@ -1,21 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthComponent } from './auth.component';
 
 const routes: Routes = [
   {
     path: '/login/user',
-    component: 'AuthComponent',
+    component: AuthComponent,
     data: {
       userType: 'user',
     },
   },
   {
     path: '/login/admin',
-    component: 'AuthComponent',
+    component: AuthComponent,
     data: {
       userType: 'admin',
     },
-  }
+  },
 ];
 
 @NgModule({
