@@ -1,5 +1,6 @@
-const Boom = require('boom');
-const moment = require('moment');
+import Boom from 'boom';
+import moment from 'moment';
+import { Request } from 'hapi';
 
 /**
  * Validator method for checking a valid web token, by default we check for a valid ID and that is has not expired
@@ -8,7 +9,7 @@ const moment = require('moment');
  * @param cb
  * @returns {*}
  */
-module.exports = async (_request, decoded) => {
+export = async (_request: Request, decoded: any) => {
   if (!decoded.id) {
     throw Boom.unauthorized();
   }

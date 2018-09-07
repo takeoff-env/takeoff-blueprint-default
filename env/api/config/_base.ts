@@ -1,10 +1,11 @@
-const Path = require('path');
+import { Manifest } from 'glue';
+import Path from 'path';
 
-module.exports = {
+const manifest: Manifest = {
   server: {
     debug: {
       log: ['error', 'debug'],
-      request: ['error']
+      request: ['error'],
     },
     port: process.env.PORT || 10000,
     app: {
@@ -15,19 +16,27 @@ module.exports = {
         isSecure: false,
         isHttpOnly: true,
         clearInvalid: false, // remove invalid cookies
-        path: '/'
-      }
+        path: '/',
+      },
     },
     router: {
-      stripTrailingSlash: true
+      stripTrailingSlash: true,
     },
     routes: {
       cors: {
-        origin: ['*']
-      }
-    }
+        origin: ['*'],
+      },
+    },
   },
   register: {
-    plugins: ['@tanepiper/hapi-auth-jwt', 'inert', 'vision', './404']
-  }
+    plugins: [
+      '@tanepiper/hapi-auth-jwt',
+      'inert',
+      'vision',
+      './database',
+      './404',
+    ],
+  },
 };
+
+export = manifest;

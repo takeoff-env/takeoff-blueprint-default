@@ -1,14 +1,16 @@
+import { Request, Server } from 'hapi';
+
 module.exports = {
   name: 'takeoff-404',
   version: '1.0.0',
-  register: async server => {
+  register: async (server: Server) => {
     server.route({
       method: ['GET', 'POST', 'PUT', 'DELETE'],
       path: '/{path*}',
-      config: {
+      options: {
         auth: false,
       },
-      handler: (req, h) => {
+      handler: async (req: Request, h: any) => {
         const accept = req.raw.req.headers.accept;
         if (accept && accept.match(/json/)) {
           throw new Error('Whoops, this resource is not available');
@@ -17,5 +19,5 @@ module.exports = {
         return h.view('views/404').code(404);
       },
     });
-  }
+  },
 };

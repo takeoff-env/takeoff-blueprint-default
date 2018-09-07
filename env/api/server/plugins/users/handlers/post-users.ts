@@ -1,7 +1,9 @@
 const { hashPassword } = require('../utils');
 
-module.exports = server => async req => {
-  const { username, password, role, displayName } = req.payload;
+import { Server, Request } from 'hapi';
+
+export = (server: Server) => async (req: Request) => {
+  const { username, password, role, displayName } = req.payload as any;
 
   try {
     const hashedPassword = await hashPassword(password);
@@ -12,7 +14,7 @@ module.exports = server => async req => {
       displayName,
     };
 
-    const newUser = new server.app.models.User(userObject);
+    const newUser = new (server.app as any).models.User(userObject);
     const data = await newUser.save();
 
     return { success: true, data };

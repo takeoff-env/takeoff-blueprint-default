@@ -1,14 +1,15 @@
-const Joi = require('joi');
+import Joi from 'joi';
+import { Server } from 'hapi';
 
-module.exports = {
+export = {
   name: 'api-users',
   version: '1.0.0',
   multiple: false,
-  register: async server => {
+  register: async (server: Server) => {
     server.route({
       method: 'GET',
       path: '/users',
-      config: {
+      options: {
         auth: {
           scope: ['admin'],
         },
@@ -28,11 +29,10 @@ module.exports = {
     server.route({
       method: 'POST',
       path: '/users',
-      config: {
+      options: {
         auth: {
           scope: ['admin'],
         },
-        auth: false,
         description: 'Create a new user',
         notes: 'Returns a new user created from a POST request',
         tags: ['api', 'user'],
@@ -51,7 +51,7 @@ module.exports = {
     server.route({
       method: 'GET',
       path: '/users/{id}',
-      config: {
+      options: {
         auth: {
           scope: ['admin'],
         },
@@ -72,7 +72,7 @@ module.exports = {
     server.route({
       method: 'GET',
       path: '/user/{name}',
-      config: {
+      options: {
         auth: {
           scope: ['admin', 'user'],
         },
@@ -93,7 +93,7 @@ module.exports = {
     server.route({
       method: 'PUT',
       path: '/users/{id}',
-      config: {
+      options: {
         auth: {
           scope: ['admin'],
         },
@@ -119,7 +119,7 @@ module.exports = {
     server.route({
       method: 'DELETE',
       path: '/users/{id}',
-      config: {
+      options: {
         auth: {
           scope: ['admin'],
         },
