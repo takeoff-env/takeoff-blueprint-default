@@ -6,11 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "npx nodemon",
-    "start": "npx md-seed run && npx nodemon",
-    "db:migrate": "npx sequelize db:migrate:undo:all && npx sequelize db:migrate",
-    "db:seed": "npx sequelize db:seed:undo:all && npx sequelize db:seed:all",
-    "db:clean": "docker exec docker_api_1 node_modules/.bin/sequelize db:migrate:undo:all && docker exec docker_api_1 node_modules/.bin/sequelize db:migrate && docker exec docker_api_1 node_modules/.bin/sequelize db:seed:all",
-    "mongodb:seed": "md-seed run"
+    "start": "npx md-seed run && npx nodemon"
   },
   "types": "types/**/*.d.ts",
   "author": "",
@@ -50,6 +46,8 @@
     "@types/mongoose": "^5.2.11",
     "@types/node": "^10.9.4",
     "@types/vision": "^5.3.4",
-    "eslint": "^5.5.0"
+    "eslint": "^5.5.0",
+    "ts-node": "^7.0.1",
+    "typescript": "^3.0.3"
   }
 }
