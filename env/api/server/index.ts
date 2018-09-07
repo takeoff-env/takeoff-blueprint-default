@@ -22,22 +22,6 @@ const createServer = async function createServer(
       layout: 'default',
     });
 
-    server.route({
-      method: ['GET', 'POST', 'PUT', 'DELETE'],
-      path: '/{path*}',
-      options: {
-        auth: false,
-      },
-      handler: (req: Request, h: any) => {
-        const accept = req.raw.req.headers.accept;
-        if (accept && accept.match(/json/)) {
-          throw new Error('Whoops, this resource is not available');
-        }
-
-        return h.view('views/404').code(404);
-      },
-    });
-
     server.state('takeoff-auth', (server.settings.app as any).cookieSettings);
 
     // If in the development environment we want to check all request and response types
