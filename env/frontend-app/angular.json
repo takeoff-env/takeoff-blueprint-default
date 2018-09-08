@@ -169,5 +169,10 @@
       }
     }
   },
-  "defaultProject": "frontend-app"
+  "defaultProject": "frontend-app",
+  "cli": {
+    "warnings": {
+      "typescriptMismatch": false
+    }
+  }
 }

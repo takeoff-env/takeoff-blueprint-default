@@ -1,9 +1,9 @@
-interface UserLogin {
+export interface UserLogin {
   username: string;
   password: string;
 }
 
-interface TokenValues {
+export interface TokenValues {
   displayName: string;
   exp: number;
   iat: number;
@@ -12,6 +12,6 @@ interface TokenValues {
   username: string;
 }
 
-interface LoginResponse {
+export interface LoginResponse {
   token: string;
 }

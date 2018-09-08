@@ -4,14 +4,14 @@ import { AuthComponent } from './auth.component';
 
 const routes: Routes = [
   {
-    path: '/login/user',
+    path: 'login/user',
     component: AuthComponent,
     data: {
       userType: 'user',
     },
   },
   {
-    path: '/login/admin',
+    path: 'login/admin',
     component: AuthComponent,
     data: {
       userType: 'admin',
