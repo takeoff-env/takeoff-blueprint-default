@@ -1,11 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'lib-takeoff-user-form',
   styleUrls: ['user-form.component.scss'],
   template: `
-    <form [formGroup]="formGroup">
+    <form [formGroup]="formGroup" (submit)="submit.next(formGroup.value)">
       <div class="form-group">
         <label for="username">Username</label>
         <input type="text"
@@ -35,10 +35,15 @@ import { FormGroup } from '@angular/forms';
         <small id="emailHelp"
           class="form-text text-muted">Enter a username</small>
       </div>
+
+      <button type="submit">Submit</button>
     </form>
   `,
 })
 export class TakeoffUserFormComponent {
   @Input()
   formGroup: FormGroup;
+
+  @Output()
+  submit = new EventEmitter();
 }

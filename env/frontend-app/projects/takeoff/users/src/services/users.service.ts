@@ -34,8 +34,37 @@ export class TakeoffUsersService {
       authorization: `Bearer ${this.authService.tokenString}`,
     };
 
-    return this.http.get<User>(`${TakeoffUsersService.apiBasePath}/users/${id}`, {
-      headers,
-    });
+    return this.http.get<User>(
+      `${TakeoffUsersService.apiBasePath}/users/${id}`,
+      {
+        headers,
+      },
+    );
+  }
+
+  addUser(user: User): Observable<any> {
+    const headers = {
+      authorization: `Bearer ${this.authService.tokenString}`,
+    };
+    return this.http.post<User>(
+      `${TakeoffUsersService.apiBasePath}/users`,
+      user,
+      {
+        headers,
+      },
+    );
+  }
+
+  updateUser(id: string, user: User): Observable<any> {
+    const headers = {
+      authorization: `Bearer ${this.authService.tokenString}`,
+    };
+    return this.http.put<User>(
+      `${TakeoffUsersService.apiBasePath}/users/${id}`,
+      user,
+      {
+        headers,
+      },
+    );
   }
 }

@@ -24,6 +24,16 @@ const routes: Routes = [
     ],
   },
   {
+    path: 'users/add',
+    component: TakeoffUserContainerComponent,
+    children: [
+      {
+        path: '',
+        component: TakeoffUserContainerComponent,
+      },
+    ],
+  },
+  {
     path: 'users/:id',
     component: TakeoffUserContainerComponent,
     resolve: {

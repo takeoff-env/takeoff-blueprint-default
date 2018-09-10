@@ -8,14 +8,14 @@ import { User } from '../../models/users';
   selector: 'lib-takeoff-user',
   template: `
     <div class="container">
-      <lib-takeoff-user-form [formGroup]="formGroup"></lib-takeoff-user-form>
+      <lib-takeoff-user-form [formGroup]="formGroup" (submit)="onSubmit()"></lib-takeoff-user-form>
     </div>
   `,
 })
 export class TakeoffUserContainerComponent implements OnInit {
   formGroup: FormGroup;
 
-  constructor(private fb: FormBuilder, private router: ActivatedRoute) {
+  constructor(private fb: FormBuilder, private router: ActivatedRoute, private userService: TakeoffUsersService) {
     this.formGroup = this.fb.group({
       username: [''],
       displayName: [''],
@@ -24,9 +24,13 @@ export class TakeoffUserContainerComponent implements OnInit {
   }
 
   ngOnInit() {
-    const { username, displayName, role }: User = this.router.snapshot.data[
-      'user'
-    ];
-    this.formGroup.setValue({ username, displayName, role });
+    if (this.router.snapshot.data['user']) {
+      const { username, displayName, role }: User = this.router.snapshot.data[
+        'user'
+      ];
+      this.formGroup.setValue({ username, displayName, role });
+    }
   }
+
+  onSubmit() {}
 }
