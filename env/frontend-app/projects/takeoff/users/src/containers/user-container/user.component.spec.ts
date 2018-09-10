@@ -1,19 +1,19 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TakeoffUsersContainerComponent } from './user.component';
+import { TakeoffUserContainerComponent } from './user.component';
 
-describe('TakeoffUsersContainerComponent', () => {
-  let component: TakeoffUsersContainerComponent;
-  let fixture: ComponentFixture<TakeoffUsersContainerComponent>;
+describe('TakeoffUserContainerComponent', () => {
+  let component: TakeoffUserContainerComponent;
+  let fixture: ComponentFixture<TakeoffUserContainerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TakeoffUsersContainerComponent],
+      declarations: [TakeoffUserContainerComponent],
     }).compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TakeoffUsersContainerComponent);
+    fixture = TestBed.createComponent(TakeoffUserContainerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
