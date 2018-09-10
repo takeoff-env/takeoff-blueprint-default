@@ -29,20 +29,13 @@ export class TakeoffUsersService {
       .pipe(take(1));
   }
 
-  getUser(id: string) {
-    this.authService.token.pipe(take(1)).subscribe((token: string) => {
-      const headers = {
-        authorization: `Bearer ${token}`,
-      };
-      this.http
-        .get(`${TakeoffUsersService.apiBasePath}/users/${id}`, {
-          headers,
-        })
-        .pipe(take(1))
-        .subscribe((result: User[]) => {
-          // this.users$.next(result);
-          console.log(result);
-        });
+  getUser(id: string): Observable<User> {
+    const headers = {
+      authorization: `Bearer ${this.authService.tokenString}`,
+    };
+
+    return this.http.get<User>(`${TakeoffUsersService.apiBasePath}/users/${id}`, {
+      headers,
     });
   }
 }

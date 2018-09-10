@@ -11,7 +11,6 @@ const routes: Routes = [
   {
     path: 'users',
     component: TakeoffUsersContainerComponent,
-    pathMatch: 'full',
     children: [
       {
         path: '',
@@ -19,7 +18,7 @@ const routes: Routes = [
         resolve: {
           users: UsersResolve,
         },
-        outlet: 'users'
+        outlet: 'users',
       },
       {
         path: ':id',
@@ -27,7 +26,7 @@ const routes: Routes = [
         resolve: {
           user: UserResolve,
         },
-        outlet: 'users'
+        outlet: 'users',
       },
     ],
   },
