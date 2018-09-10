@@ -58,13 +58,13 @@ export = {
         description: 'Get a user from the system',
         notes: 'Returns an existing user by ID',
         tags: ['api', 'user'],
-        validate: {
-          params: {
-            id: Joi.string()
-              .guid()
-              .required(),
-          },
-        },
+        // validate: {
+        //   params: {
+        //     id: Joi.string()
+        //       .guid()
+        //       .required(),
+        //   },
+        // },
       },
       handler: require('./handlers/get-user-by-id')(server),
     });

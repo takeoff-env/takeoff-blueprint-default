@@ -20,15 +20,14 @@ const routes: Routes = [
         },
         outlet: 'users',
       },
-      {
-        path: ':id',
-        component: TakeoffUserFormComponent,
-        resolve: {
-          user: UserResolve,
-        },
-        outlet: 'users',
-      },
     ],
+  },
+  {
+    path: 'users/:id',
+    component: TakeoffUserFormComponent,
+    resolve: {
+      user: UserResolve,
+    },
   },
 ];
 
