@@ -1,16 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { User } from '../../models/users';
+import { Component, Input } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'lib-takeoff-user-form',
   styleUrls: ['user-form.component.scss'],
   template: `
     <form [formGroup]="formGroup">
-    <input type="hidden" formControlName="__v" id="__v" />
-      <input type="hidden" formControlName="_id" id="_id" />
-
       <div class="form-group">
         <label for="username">Username</label>
         <input type="text"
@@ -43,22 +38,7 @@ import { User } from '../../models/users';
     </form>
   `,
 })
-export class TakeoffUserFormComponent implements OnInit {
+export class TakeoffUserFormComponent {
+  @Input()
   formGroup: FormGroup;
-
-  constructor(private fb: FormBuilder, private router: ActivatedRoute) {
-    console.log(router);
-    this.formGroup = this.fb.group({
-      _id: [''],
-      __v: [''],
-      username: [''],
-      displayName: [''],
-      role: [''],
-    });
-  }
-
-  ngOnInit() {
-    const user: User = this.router.snapshot.data['user'];
-    this.formGroup.setValue(user);
-  }
 }

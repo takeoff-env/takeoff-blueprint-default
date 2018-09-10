@@ -9,6 +9,7 @@ import { TakeoffUsersListComponent } from './components/users-list/users-list.co
 import { TakeoffUserFormComponent } from './components/user-form/user-form.component';
 import { UsersResolve } from './resolvers/users.resolver';
 import { UserResolve } from './resolvers/user.resolver';
+import { TakeoffUserContainerComponent } from './containers/user-container/user.component';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { UserResolve } from './resolvers/user.resolver';
   ],
   declarations: [
     TakeoffUsersContainerComponent,
+    TakeoffUserContainerComponent,
     TakeoffUsersListComponent,
     TakeoffUserFormComponent,
   ],

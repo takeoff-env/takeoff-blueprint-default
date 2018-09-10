@@ -6,6 +6,7 @@ import { TakeoffUsersListComponent } from '../components/users-list/users-list.c
 import { TakeoffUserFormComponent } from '../components/user-form/user-form.component';
 import { UsersResolve } from '../resolvers/users.resolver';
 import { UserResolve } from '../resolvers/user.resolver';
+import { TakeoffUserContainerComponent } from '../containers/user-container/user.component';
 
 const routes: Routes = [
   {
@@ -24,10 +25,16 @@ const routes: Routes = [
   },
   {
     path: 'users/:id',
-    component: TakeoffUserFormComponent,
+    component: TakeoffUserContainerComponent,
     resolve: {
       user: UserResolve,
     },
+    children: [
+      {
+        path: '',
+        component: TakeoffUserContainerComponent,
+      },
+    ],
   },
 ];
 
