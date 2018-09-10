@@ -37,6 +37,18 @@
       ],
       "@takeoff/auth/*": [
         "dist/takeoff/auth/*"
+      ],
+      "@takeoff/users": [
+        "dist/takeoff/users"
+      ],
+      "@takeoff/users/*": [
+        "dist/takeoff/users/*"
+      ],
+      "@takeoff/dashboard": [
+        "dist/takeoff/dashboard"
+      ],
+      "@takeoff/dashboard/*": [
+        "dist/takeoff/dashboard/*"
       ]
     }
   }

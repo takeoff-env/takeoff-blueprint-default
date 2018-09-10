@@ -28,6 +28,7 @@
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
+              "theme/bootstrap4-business-tycoon.min.css",
               "src/styles.scss"
             ],
             "scripts": []
@@ -160,6 +161,81 @@
             "tsConfig": [
               "projects/takeoff/auth/tsconfig.lib.json",
               "projects/takeoff/auth/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@takeoff/users": {
+      "root": "projects/takeoff/users",
+      "sourceRoot": "projects/takeoff/users/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/takeoff/users/tsconfig.lib.json",
+            "project": "projects/takeoff/users/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "project": "projects/takeoff/users/ng-package.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/takeoff/users/src/test.ts",
+            "tsConfig": "projects/takeoff/users/tsconfig.spec.json",
+            "karmaConfig": "projects/takeoff/users/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/takeoff/users/tsconfig.lib.json",
+              "projects/takeoff/users/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "@takeoff/dashboard": {
+      "root": "projects/takeoff/dashboard",
+      "sourceRoot": "projects/takeoff/dashboard/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "targets": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/takeoff/dashboard/tsconfig.lib.json",
+            "project": "projects/takeoff/dashboard/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/takeoff/dashboard/src/test.ts",
+            "tsConfig": "projects/takeoff/dashboard/tsconfig.spec.json",
+            "karmaConfig": "projects/takeoff/dashboard/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/takeoff/dashboard/tsconfig.lib.json",
+              "projects/takeoff/dashboard/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"

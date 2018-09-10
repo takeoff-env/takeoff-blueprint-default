@@ -1,0 +1,7 @@
+<main>
+  <takeoff-navbar [isAuthenticated]="authService.isAuthenticated | async"
+    [isAdmin]="authService.isAdmin | async" (authUser)=authUser($event)></takeoff-navbar>
+  <main class="container">
+    <router-outlet></router-outlet>
+  </main>
+</main>

@@ -69,26 +69,26 @@ export = {
       handler: require('./handlers/get-user-by-id')(server),
     });
 
-    server.route({
-      method: 'GET',
-      path: '/user/{name}',
-      options: {
-        auth: {
-          scope: ['admin', 'user'],
-        },
-        description: 'Get a user from the system by username',
-        notes: 'Returns an existing user by ID',
-        tags: ['api', 'user'],
-        validate: {
-          params: {
-            id: Joi.string()
-              .guid()
-              .required(),
-          },
-        },
-      },
-      handler: require('./handlers/get-user-by-id')(server),
-    });
+    // server.route({
+    //   method: 'GET',
+    //   path: '/user/{name}',
+    //   options: {
+    //     auth: {
+    //       scope: ['admin', 'user'],
+    //     },
+    //     description: 'Get a user from the system by username',
+    //     notes: 'Returns an existing user by ID',
+    //     tags: ['api', 'user'],
+    //     validate: {
+    //       params: {
+    //         id: Joi.string()
+    //           .guid()
+    //           .required(),
+    //       },
+    //     },
+    //   },
+    //   handler: require('./handlers/get-user-by-id')(server),
+    // });
 
     server.route({
       method: 'PUT',
