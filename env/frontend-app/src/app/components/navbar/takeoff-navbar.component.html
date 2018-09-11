@@ -1,0 +1,14 @@
+<nav class="navbar navbar-dark bg-dark">
+  <a class="navbar-brand"
+    href="#">Takeoff</a>
+
+  <nav class="navbar-nav" *ngIf="isAuthenticated && isAdmin">
+    <a class="btn" [routerLink]="['/users']" routerLinkActive="router-link-active">Users</a>
+  </nav>
+
+  <nav class="navbar-nav ml-md-auto d-md-flex">
+    <button class="btn"
+      (click)="authUser.next(isAuthenticated)">{{isAuthenticated ? 'Logout' :
+      'Login'}}</button>
+  </nav>
+</nav>

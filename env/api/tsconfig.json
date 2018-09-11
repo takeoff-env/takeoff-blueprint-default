@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "declaration": false,
+    "esModuleInterop": true,
+    "target": "es6",
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "sourceMap": false,
+    "outDir": "dist",
+    "rootDir": ".",
+    "baseUrl": ".",
+    "paths": {
+      "*": ["node_modules/*", "types/*"]
+    },
+    "typeRoots": ["node_modules/@types", "types/*"]
+  },
+  "files": ["index.ts", "config/**/*", "database/**/*", "server/**/*"],
+  "exclude": ["node_modules/**/*", "**/*.spec.ts"]
+}

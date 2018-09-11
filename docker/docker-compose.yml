@@ -3,10 +3,10 @@ version: '3'
 services:
 
   # Nginx Server
-  server:
+  ingress:
     build:
       context: ../.
-      dockerfile: docker/server/Dockerfile
+      dockerfile: docker/ingress/Dockerfile
     image: ngnix-server
     ports:
       - '80:80' # Connect localhost 80 port to container 80 port
@@ -21,12 +21,13 @@ services:
   app:
     build:
       context: ../.
-      dockerfile: docker/app/Dockerfile
-    image: frontend-app
-    env_file: 
-      - ./../env/app/.env
+      dockerfile: docker/frontend-app/Dockerfile
+    image: app
+    env_file:
+      - ./../env/frontend-app/.env
     volumes: # For webpack dev server to use our local files
-      - ./../env/app:/home/envuser/apphome
+      - ./../env/frontend-app:/home/envuser/apphome
+      - /home/envuser/apphome/node_modules
     ports:
       - '10001:10001' # For docker to now where to redirect HMR queries
 
@@ -35,24 +36,25 @@ services:
     build:
       context: ../.
       dockerfile: docker/api/Dockerfile
-    image: api-server
-    env_file: 
+    image: api
+    env_file:
       - ./../env/api/.env
     links:
       - db:db
     volumes:
       - ./../env/api:/home/envuser/apphome
+      - /home/envuser/apphome/node_modules
     ports:
       - '10000:10000'
     depends_on:
       - "db"
-  
-  # Database
+
   db:
-    build:
-      context: ../.
-      dockerfile: docker/db/postgres/Dockerfile
-    env_file: ./../env/db/psql.env
-    image: database
+    image: mongo
     ports:
-      - '5431:5432'
+      - "27017:27017"
+    volumes:
+      - data-volume:/data/db
+
+volumes:
+  data-volume:

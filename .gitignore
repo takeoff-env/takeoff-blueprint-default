@@ -55,3 +55,4 @@ typings/
 .yarn-integrity
 
 .vscode
+env/frontend-app/node_modules

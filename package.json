@@ -12,14 +12,8 @@
     "type": "git",
     "url": "https://github.com/takeoff-env/takeoff-blueprint-basic.git"
   },
-  "author": "Tane Piper <piper.tane@gmail.com>",
-  "scripts": {
-    "bootstrap": "lerna bootstrap",
-    "api:connect": "docker exec -it docker_api_1 /bin/bash",
-    "db:connect": "psql -h localhost -p 5431 -U myappuser -d myappdb",
-    "db:reset": "node utilities/takeoff/database-clean.js"
-  },
-  "dependencies": {
-    "lerna": "^2.4.0"
+  "author": {
+    "name": "Tane Piper",
+    "url": "https://github.com/tanepiper"
   }
 }
