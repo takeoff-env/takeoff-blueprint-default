@@ -14,7 +14,7 @@ export = (server: Server) => async (req: Request) => {
       displayName,
     };
 
-    const newUser = new (server.app as any).models.User(userObject);
+    const newUser = new (server.app as any).db.models.User(userObject);
     const data = await newUser.save();
 
     return { success: true, data };

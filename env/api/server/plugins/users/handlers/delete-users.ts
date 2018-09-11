@@ -9,7 +9,7 @@ export = (server: Server) => async (req: Request) => {
   }
 
   try {
-    const result = await (server.app as any).models.User.deleteOne({ id });
+    const result = await (server.app as any).db.models.User.deleteOne({ id });
 
     if (!result) {
       throw new Error('There has been an error deleting this user');

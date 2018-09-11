@@ -7,7 +7,7 @@ export = (server: Server) => async (req: Request) => {
     password = await hashPassword(password);
   }
   try {
-    const result = await (server.app as any).models.User.updateOne(
+    const result = await (server.app as any).db.models.User.updateOne(
       { id: req.params.id },
       { password },
     );
