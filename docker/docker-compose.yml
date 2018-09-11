@@ -27,6 +27,7 @@ services:
       - ./../env/frontend-app/.env
     volumes: # For webpack dev server to use our local files
       - ./../env/frontend-app:/home/envuser/apphome
+      - app-node-modules:/home/envuser/apphome/node_modules
     ports:
       - '10001:10001' # For docker to now where to redirect HMR queries
 
@@ -42,6 +43,7 @@ services:
       - db:db
     volumes:
       - ./../env/api:/home/envuser/apphome
+      - api-node-modules:/home/envuser/apphome/node_modules
     ports:
       - '10000:10000'
     depends_on:
@@ -56,3 +58,5 @@ services:
 
 volumes:
   data-volume:
+  app-node-modules:
+  api-node-modules:
