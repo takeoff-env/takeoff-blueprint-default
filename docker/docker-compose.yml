@@ -3,10 +3,10 @@ version: '3'
 services:
 
   # Nginx Server
-  server:
+  ingress:
     build:
       context: ../.
-      dockerfile: docker/server/Dockerfile
+      dockerfile: docker/ingress/Dockerfile
     image: ngnix-server
     ports:
       - '80:80' # Connect localhost 80 port to container 80 port
