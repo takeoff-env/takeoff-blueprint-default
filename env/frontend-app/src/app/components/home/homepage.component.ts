@@ -9,7 +9,7 @@ import { Component } from '@angular/core';
       <div class="card-body">
         <h3 class="card-header">Welcome to Takeoff</h3>
         <div class="card-text">
-          Takeoff Development Environment: Online!
+          Takeoff: Online!
         </div>
         <div class="card-text">
           <div class="btn-group" role="group" aria-label="Basic example">

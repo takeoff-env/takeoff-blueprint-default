@@ -1,6 +1,6 @@
 ## npm:install:api
 
-Run task `npm:install:app` after this
+Run task `npm:install:app` in parallel
 
 ```bash
 cd env/api && npm install --silent
