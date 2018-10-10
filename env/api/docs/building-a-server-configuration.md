@@ -13,7 +13,7 @@ that contains a set of default values listed below.  For more information on the
 ## `development` defaults
 
 The development defaults are in `api/config/development.js`. The file name is based on the `NODE_ENV` variable set, so you can put a file in
-here with any name provided you want to run that environment.
+here with any name provided you want to run that workspace.
 
 You will always need to start by importing the base config from the file (unless you want full control over your config file)
 
